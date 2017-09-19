@@ -1,0 +1,26 @@
+<!--
+  Generated template for the Admin page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!-- Keanu Admin Page -->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle> 
+    <ion-icon name="menu"></ion-icon> 
+    </button>
+    <ion-title>Admin</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <button ion-item *ngFor="let p of item" (click)="openPage(p)"> 
+      {{p.title}} 
+    </button>
+  </ion-list>
+</ion-content>

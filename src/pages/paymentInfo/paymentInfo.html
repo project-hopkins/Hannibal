@@ -1,0 +1,73 @@
+<!--
+  Generated template for the Login page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Register User Cont.</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <!--Adress Information-->
+    <div padding>
+      <h2>Address Information</h2>
+      <ion-item>
+        <ion-label floating>Street Number</ion-label>
+        <ion-input type="text" [(ngModel)]="address.number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Street Name</ion-label>
+        <ion-input type="text" [(ngModel)]="address.name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Street Type</ion-label>
+        <ion-input type="text" [(ngModel)]="address.streetType"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Postal Code</ion-label>
+        <ion-input type="text" [(ngModel)]="address.postalCode"></ion-input>
+      </ion-item>
+    </div>
+    <!--Payment Information-->
+    <div padding>
+      <h2>Credit Card Information</h2>
+      <ion-item>
+        <ion-label floating>Name On The Card</ion-label>
+        <ion-input type="text" [(ngModel)]="paymentInfo.name"></ion-input>
+      </ion-item>
+
+      <!--<ion-item>
+        <ion-label floating>Credit Card Type</ion-label>
+        <ion-input type="text" [(ngModel)]="paymentInfo.cardType"></ion-input>
+      </ion-item>-->
+      <ion-item>
+        <ion-label>Card Type</ion-label>
+        <ion-select [(ngModel)]="paymentInfo.cardType">
+          <ion-option value="VISA">VISA</ion-option>
+          <ion-option value="MASTERCARD">Mastercard</ion-option>
+          <ion-option value="AMEX">Amex</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Credit Card Number</ion-label>
+        <ion-input type="text" [(ngModel)]="paymentInfo.num"></ion-input>
+      </ion-item>
+
+      <!--<ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MMMM DD YYYY" [(ngModel)]="paymentInfo.expiry"></ion-datetime>
+    </ion-item>-->
+    </div>
+  </ion-list>
+
+  <div padding>
+    <button block ion-button (click)="Register($event)">Register!</button>
+  </div>
+</ion-content>

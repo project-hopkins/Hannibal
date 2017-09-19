@@ -1,0 +1,63 @@
+<!--
+  Generated template for the Order page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>Order</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider color="light">Payment Information</ion-item-divider>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/images/creditcard-flat.png">
+        </ion-avatar>
+        <h2>{{paymentInformation.num}}</h2>
+        <h3>{{paymentInformation.cardType}}</h3>
+        <p>{{paymentInformation.name}}</p>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+     <ion-item-divider color="light">Ordered Items</ion-item-divider>
+      <ion-item *ngFor="let cartItem of orderItems">
+        <ion-avatar item-left>
+          <img src="{{cartItem.imageURL}}">
+        </ion-avatar>
+        <h2>{{cartItem.name}}</h2>
+        <h3>{{cartItem.quantity}}</h3>
+        <p>{{cartItem.price}}</p>
+      </ion-item>
+    </ion-item-group>
+    <ion-item-group>
+      <ion-item-divider color="light">Total Price</ion-item-divider>
+      <ion-item>
+        <ion-label>Delivery - $3 Fee</ion-label>
+        <ion-toggle [(ngModel)]="deliveryTgl" (ionChange)="ChangeMoney()"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-avatar item-left>
+          <img src="assets/images/cash_icon.png">
+        </ion-avatar>
+        <h3>Subtotal : ${{totalPrice.subTotal}}</h3>
+        <h3>Tax : ${{totalPrice.tax}}</h3>
+        <h2>Total : ${{totalPrice.total}}</h2>
+      </ion-item>
+      <ion-item> 
+        <button ion-button full large (click)="ConfirmOrder()"> Confirm Order </button>
+      </ion-item>
+    </ion-item-group>
+    
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,34 @@
+<!--
+  Generated template for the Submenu page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{this.menuItems[0].category}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of menuItems">
+    <img src={{item.imageURL}}/>
+    <ion-card-content>
+      <ion-card-title class="center">{{item.name}}</ion-card-title>
+      <p class="center">{{item.description}}</p>
+      <p class="center">{{item.calories}} calories</p>
+      <button class="submenu-BtnCart" (click)="addItem(item._id)">
+        <p class="submenu-Calories"><strong></strong></p>
+        <p class="submenu-Message"><strong>Add To Cart</strong></p>
+        <p class="submenu-Price"><strong>${{item.price}}</strong></p>
+      </button>
+
+      <!-- Delete Button neil-->
+      <button ion-button color="danger" full *ngIf="isAdmin" (click)="deleteClick(item._id)"><ion-icon name="close"> Remove</ion-icon>
+      </button>
+
+      <!-- Edit Button neil-->
+      <button ion-button color="blue" full *ngIf="isAdmin" (click)="editItemClick(item)">Edit</button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
