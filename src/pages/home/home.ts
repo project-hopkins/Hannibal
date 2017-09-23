@@ -14,7 +14,6 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
   public menuItems;
-  //public SubMenuPage = SubmenuPage;
   public itemsInSubmenu: Object
 
   constructor(

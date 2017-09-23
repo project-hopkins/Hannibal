@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
-//import { AdminPage } from '../admin/admin';
 import { Storage } from '@ionic/storage';
 
 @IonicPage()

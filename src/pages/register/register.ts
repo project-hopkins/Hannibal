@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
-//import { PaymentInfoPage } from '../paymentInfo/paymentInfo';
 
 /*
   See http://ionicframework.com/docs/v2/components/#navigation for more info on

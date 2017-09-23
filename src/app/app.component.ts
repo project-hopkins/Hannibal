@@ -5,15 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 import { OneSignal } from '@ionic-native/onesignal';
 
-// Keanu Pages
-//import { LoginPage } from '../pages/login/login';
-
-//import { RestaurantinfoPage } from '../pages/restaurantinfo/restaurantinfo';
-//import { AdminPage } from '../pages/admin/admin';
-//import { CartPage } from '../pages/cart/cart';
-//import { ProfilePage } from '../pages/profile/profile';
-//import { SearchPage } from '../pages/search/search';
-
 @Component({
   templateUrl: 'app.html',
   providers: [OneSignal]

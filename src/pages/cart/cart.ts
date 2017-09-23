@@ -3,7 +3,6 @@ import { NavController, NavParams, AlertController, Alert, IonicPage } from 'ion
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { CartService } from '../../services/cartService';
-//import { OrderPage } from '../order/order'
 
 @IonicPage()
 @Component({
