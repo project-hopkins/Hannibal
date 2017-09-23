@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
-import { AdminPage } from '../admin/admin';
+//import { AdminPage } from '../admin/admin';
 import { Storage } from '@ionic/storage';
 
+@IonicPage()
 @Component({
   selector: 'page-add-item',
   templateUrl: 'add-item.html'
@@ -62,7 +63,7 @@ export class AddItemPage {
             subTitle: 'Congratulations, a menu item has been added!',
             buttons: ['OK']
           }).present();
-          this.navCtrl.setRoot(AdminPage);
+          this.navCtrl.setRoot('AdminPage');
         }
         )
 

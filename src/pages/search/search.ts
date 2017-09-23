@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { LoadingController, AlertController } from 'ionic-angular';
+import { LoadingController, AlertController, IonicPage } from 'ionic-angular';
 
 import { CartService } from "../../services/cartService";
 
+@IonicPage()
 @Component({
   selector: 'page-search',
   templateUrl: 'search.html',

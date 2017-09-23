@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams,IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { LoadingController, Loading } from 'ionic-angular';
@@ -10,6 +10,7 @@ import { LoadingController, Loading } from 'ionic-angular';
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+@IonicPage()
 @Component({
   selector: 'page-edititem',
   templateUrl: 'edititem.html'
@@ -31,9 +32,7 @@ export class EdititemPage {
 
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EdititemPage');
-  }
+  ionViewDidLoad() {}
 
   //Accept Change Button Event Handler
 

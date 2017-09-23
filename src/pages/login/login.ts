@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Http, Headers } from '@angular/http';
-import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, IonicPage } from 'ionic-angular';
 import { HomePage } from '../home/home';
-import { RegisterPage } from '../register/register';
 import 'rxjs/Rx';
 /*
   Class for the Login page.
 
 */
+@IonicPage()
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -17,7 +17,7 @@ export class LoginPage {
 
   public username: string;
   public password: string;  
-  registerPage = RegisterPage  
+
 
   constructor(
     private navCtrl: NavController,
@@ -67,6 +67,9 @@ export class LoginPage {
               this.navCtrl.setRoot(HomePage);
             }
         );
+  }
+  public GoToRegisterPage(){
+    this.navCtrl.push('RegisterPage');
   }
 
 }

@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
-import { NavController, NavParams } from 'ionic-angular';
-import { PaymentInfoPage } from '../paymentInfo/paymentInfo';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
+//import { PaymentInfoPage } from '../paymentInfo/paymentInfo';
 
 /*
-  Generated class for the Login page.
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
+@IonicPage()
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'
@@ -28,7 +28,7 @@ export class RegisterPage {
     this.email='';
     }
     public next():void{
-    this.navCtrl.push(PaymentInfoPage, {
+    this.navCtrl.push('PaymentInfoPage', {
       DisplayNameParam: this.DisplayName,
       emailparam: this.email,
       usernameParam: this.username,
