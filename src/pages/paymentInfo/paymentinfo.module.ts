@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PaymentInfoPage} from './paymentinfo';
+import { PaymentInfoPage} from './paymentInfo';
 import { IonicPageModule } from 'ionic-angular';
 
 @NgModule({
