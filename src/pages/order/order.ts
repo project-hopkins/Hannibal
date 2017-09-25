@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
 import { Http, RequestOptions, Headers, } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { OneSignal } from '@ionic-native/onesignal';
@@ -13,6 +13,7 @@ import { ItemService } from '../../services/getItem';
 // Create Service for creating orderItemsSent
 
 // I only post to the backend once the button is clicked on this page
+@IonicPage()
 @Component({
   selector: 'page-order',
   templateUrl: 'order.html',

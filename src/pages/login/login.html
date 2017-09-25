@@ -33,6 +33,6 @@
     <button block ion-button (click)="login($event)">Login</button>
   </div>
   <div>
-    <button ion-button clear [navPush]="registerPage" class="RegisterLink">Don't have an Account? Register Here!</button>
+    <button ion-button clear (click)="GoToRegisterPage()" class="RegisterLink">Don't have an Account? Register Here!</button>
   </div>
 </ion-content>

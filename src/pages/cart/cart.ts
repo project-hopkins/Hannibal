@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, Alert } from 'ionic-angular';
+import { NavController, NavParams, AlertController, Alert, IonicPage } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { CartService } from '../../services/cartService';
-import { OrderPage } from '../order/order'
 
+@IonicPage()
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
@@ -31,7 +31,10 @@ export class CartPage {
 
   public GoOrderPage() {
 
-    this.navCtrl.push(OrderPage);
+    this.navCtrl.push('OrderPage');
+  }
+  public GoToLogin(){
+    this.navCtrl.push('LoginPage');
   }
 
   public IncreaseQuantity(cartItem: Object): void {

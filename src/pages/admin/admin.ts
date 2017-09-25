@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Nav } from 'ionic-angular';
 
-import { AddItemPage } from '../add-item/add-item';
+//import { AddItemPage } from '../add-item/add-item';
 
 /*
   Generated class for the Admin page.
@@ -22,7 +22,7 @@ export class AdminPage {
 
     this.item =
       [
-        { title: 'Add Menu Item', component: AddItemPage }
+        { title: 'Add Menu Item', component: 'AddItemPage' }
       ];
   }
   ionViewDidLoad() {

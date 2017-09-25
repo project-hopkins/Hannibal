@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, Loading } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading, IonicPage } from 'ionic-angular';
 import { SubmenuPage } from '../submenu/submenu';
 import { Http } from '@angular/http';
 import { MenuCallService } from '../../services/getMenu';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
@@ -13,7 +14,6 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
   public menuItems;
-  public SubMenuPage = SubmenuPage;
   public itemsInSubmenu: Object
 
   constructor(
@@ -66,7 +66,7 @@ export class HomePage {
       console.log('###### From HOME START ######')
       console.log(menuItems)
       console.log('###### From HOME END ######')
-      this.navCtrl.push(this.SubMenuPage, { data: menuItems }).then(() => loading.dismiss())
+      this.navCtrl.push('SubmenuPage', { data: menuItems }).then(() => loading.dismiss())
     })
 
   }

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { NavController, NavParams, LoadingController, Loading, AlertController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, Loading, AlertController, IonicPage } from 'ionic-angular';
 import { CartService } from '../../services/cartService';
 import { Http, Headers, RequestOptions } from '@angular/http';
-import { EdititemPage } from '../edititem/edititem';
 
 
+@IonicPage()
 @Component({
   selector: 'page-submenu',
   templateUrl: 'submenu.html',
@@ -38,7 +38,7 @@ export class SubmenuPage {
 
     let loader: Loading = this.loadingCtrl.create({ content: 'loading item to edit' })
 
-    this.navCtrl.push(EdititemPage, { data: item }).then(() => loader.dismiss())
+    this.navCtrl.push('EdititemPage', { data: item }).then(() => loader.dismiss())
 
   }
   // Delete Button Event - neil

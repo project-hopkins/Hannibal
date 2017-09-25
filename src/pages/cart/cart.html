@@ -47,7 +47,7 @@
   </div>
 
   <div padding *ngIf="token == null && cartItems.length !==0">
-    <button ion-button block large>Please Login to Checkout</button>
+    <button ion-button block large (click)="GoToLogin()">Please Login to Checkout</button>
   </div>
 
 </ion-content>

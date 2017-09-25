@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { LoginPage } from '../login/login'
+import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
 
+@IonicPage()
 @Component({
   selector: 'page-paymentInfo',
   templateUrl: 'paymentInfo.html'
@@ -66,7 +66,7 @@ export class PaymentInfoPage {
           subTitle: 'Congratulations, redirecting to the login page',
           buttons: ['OK']
         }).present();
-        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.setRoot('LoginPage');
       }
       )
 
