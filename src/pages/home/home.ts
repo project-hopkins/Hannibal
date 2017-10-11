@@ -14,7 +14,8 @@ import { Storage } from '@ionic/storage';
 })
 export class HomePage {
   public menuItems;
-  public itemsInSubmenu: Object
+  public itemsInSubmenu: Object;
+  private menuCategories: Array<string> = ["Starter", "Salads", "Entrees", "Dessert"];
 
   constructor(
     public navCtrl: NavController,
@@ -22,50 +23,49 @@ export class HomePage {
     public http: Http,
     private menuCall: MenuCallService,
     private storage: Storage,
-    private loadingCtrl: LoadingController
-  ) {
+    private loadingCtrl: LoadingController) {
+
     let loading: Loading = this.loadingCtrl.create({});
     loading.present();
 
+    // Instantiate the itemsInSubMenu object with 0 for each item
+
     this.itemsInSubmenu = {
       'Starter': 0,
-      'Salad': 0,
-      'Entree': 0,
+      'Salads': 0,
+      'Entrees': 0,
       'Dessert': 0
-    };
-
-    this.http.get(`https://keanubackend.herokuapp.com/item/category/Starter/count`).map(res => res.json()).subscribe(
-      data => {
-        this.itemsInSubmenu['Starter'] = data.data.count;
-        console.log(data.data.count);
-      });
-    this.http.get(`https://keanubackend.herokuapp.com/item/category/Salads/count`).map(res => res.json()).subscribe(
-      data => {
-        this.itemsInSubmenu['Salad'] = data.data.count;
-        console.log(data.data.count);
-      });
-    this.http.get(`https://keanubackend.herokuapp.com/item/category/Entrees/count`).map(res => res.json()).subscribe(
-      data => {
-        this.itemsInSubmenu['Entree'] = data.data.count;
-        console.log(data.data.count);
-      });
-    this.http.get(`https://keanubackend.herokuapp.com/item/category/Dessert/count`).map(res => res.json()).subscribe(
-      data => {
-        this.itemsInSubmenu['Dessert'] = data.data.count;
-        console.log(data.data.count);
-      });
+    }
 
     this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
+
+    // Grabs the number of items in each menu category.
+    this.menuCategories.forEach(element => {
+      this.http.get(`https://keanubackend.herokuapp.com/item/category/${element}/count`).map(res => res.json()).subscribe(
+        data => {
+          this.itemsInSubmenu[element] = data.data.count;
+          console.log(element + " " + data.data.count);
+        });
+    });
   }
 
+  // The following method is already in a service. Althought it doesnt really need it. 
+  /**
+   * Method that activates when a menu item is clicked.
+   * Sends the string of the menu item clicked (ie. starter) to the backend and retrieves the food items from that menu.
+   * Sends this data to the next page.
+   * 
+   * @param {string} type 
+   * @memberof HomePage
+   */
   public launchSubMenuPage(type: string): void {
     let loading: Loading = this.loadingCtrl.create({})
     loading.present();
 
     this.menuCall.getMenu(type).then((menuItems: Array<any>) => {
-      console.log('###### From HOME START ######')
+      /* console.log('###### From HOME START ######')
       console.log(menuItems)
-      console.log('###### From HOME END ######')
+      console.log('###### From HOME END ######') */
       this.navCtrl.push('SubmenuPage', { data: menuItems }).then(() => loading.dismiss())
     })
 
