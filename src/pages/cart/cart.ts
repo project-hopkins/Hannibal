@@ -29,17 +29,34 @@ export class CartPage {
     this.delivery = false;
   }
 
+  /**
+   * Method that goes to the Cart Page.
+   * Is only accessible if the user is logged in.
+   * 
+   * @memberof CartPage
+   */
   public GoOrderPage() {
-
     this.navCtrl.push('OrderPage');
   }
+
+  /**
+   * Method that goes to the login page
+   * Is only accessible if the user is not logged in.
+   * 
+   * @memberof CartPage
+   */
   public GoToLogin(){
     this.navCtrl.push('LoginPage');
   }
-
+  
+  /**
+   * Method that increases the quantity of a item from the cart.
+   * 
+   * @param {Object} cartItem 
+   * @memberof CartPage
+   */
   public IncreaseQuantity(cartItem: Object): void {
-    //console.log(cartItem);
-    console.log(cartItem);
+    // console.log(cartItem);
     this.cartService.increaseQuantity(cartItem).then(value => {
       if (value) {
         this.cartService.getCartItems().then(itemsData => {
@@ -47,9 +64,15 @@ export class CartPage {
         });
       }
     });
-
   }
 
+  /**
+   * Method that decreases quantity of a item from the cart.
+   * Will not work if quantity of the item is less than one.
+   * 
+   * @param {Object} cartItem 
+   * @memberof CartPage
+   */
   public DecreaseQuantity(cartItem: Object) {
     this.cartService.decreaseQuantity(cartItem).then(value => {
       if (value) {
@@ -58,15 +81,15 @@ export class CartPage {
         })
       }
     });
-
-
   }
 
   /**
-   * DeleteItem
+   * Method that deletes the item from the cart.
+   * 
+   * @param {Object} cartItem 
+   * @memberof CartPage
    */
   public DeleteItem(cartItem: Object) {
-
     let delFunction = () => {
       this.cartService.deleteFromCart(cartItem['item']['_id']).then(value => {
         if (value) {
