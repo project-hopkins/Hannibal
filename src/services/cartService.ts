@@ -165,8 +165,15 @@ export class CartService {
 					currentQuantity = this.cartItems.get(cartItem.item._id);
 					currentQuantity--;
 				}
-				// set the cart
-				this.cartItems.set(cartItem.item._id, currentQuantity)
+
+				// Cant have a quantity of 0
+				if(currentQuantity != 0){
+					this.cartItems.set(cartItem.item._id, currentQuantity)	
+				}
+
+				else {
+					console.log("You cant do that");
+				}
 
 				// store the cart
 				this.storage.set(this._cartName, this.cartItems).then(() => {
