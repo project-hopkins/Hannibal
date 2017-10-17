@@ -7,7 +7,12 @@ import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [OneSignal]
+  providers: [OneSignal],
+  styles:[
+
+    '.admin-background {background-color: red}',
+    '.norm-background{background-color: blue}'
+  ]
 })
 export class MyApp {
   rootPage: any = 'HomePage';
@@ -51,7 +56,14 @@ export class MyApp {
     
     this.index = 0;
     // Title + Routes for the Menu
-    this.pages = [
+    
+    this.storage.get('adminRights').then((isAdmin:boolean) => { if (isAdmin) {this.pages=[
+
+      { title: 'Home', component: 'HomePage' },
+      { title: 'Search', component: 'SearchPage' }
+    ];
+    
+    }else {this.pages = [
       { title: 'Home', component: 'HomePage' }, // Added Home as the first menu option 
       //Restaurant infomation page
       { title: 'About Us', component: 'RestaurantinfoPage' },
@@ -59,6 +71,10 @@ export class MyApp {
       { title: 'Search', component: 'SearchPage' }
 
     ];
+      
+    }})
+    
+    
 
     // push admin page if user is an admin
     this.storage.get('adminRights').then((isAdmin: boolean) => {

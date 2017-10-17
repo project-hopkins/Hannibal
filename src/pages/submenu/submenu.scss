@@ -12,7 +12,20 @@
     
 }
 */
+$colors: (
+    nonAdmin: blue,
+    admin:red,
+);
 
+// submenu header red if admin logged in
+.admin-background {
+    background-color: red!important;
+    
+  }
+
+.norm-background{
+    background-color: blue;
+}
 
 .submenu-BtnCart{
     margin-top: 15px;
