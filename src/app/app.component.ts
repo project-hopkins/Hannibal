@@ -7,12 +7,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [OneSignal],
-  styles: [
-
-    '.admin-background {background-color: red}',
-    '.norm-background{background-color: blue}'
-  ]
+  providers: [OneSignal]
 })
 export class MyApp {
   rootPage: any = 'HomePage';

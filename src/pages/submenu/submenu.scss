@@ -12,54 +12,43 @@
     
 }
 */
-$colors: (
-    nonAdmin: blue,
-    admin:red,
-);
 
-// submenu header red if admin logged in
-.admin-background {
-    background-color: red!important;
-    
-  }
+page-submenu{
+        
+    .submenu-BtnCart{
+        margin-top: 15px;
+        background-color: #32cd32;
+        width: 100%;
+        height: 25px;
+    }
 
-.norm-background{
-    background-color: blue;
-}
+    .center{
+        text-align: center;
+    }
 
-.submenu-BtnCart{
-    margin-top: 15px;
-    background-color: #32cd32;
-    width: 100%;
-    height: 25px;
-}
+    strong{
+        color: white;
+    }
 
-.center{
-    text-align: center;
-}
+    .submenu-Price{
+        display: inline;
+        text-align: right;
+        float: right;
+    }
 
-strong{
-    color: white;
-}
+    .submenu-Message{
+        display: inline;
+        text-align: center; 
+        float: center;
+        padding-left: 40px;
+    }
 
-.submenu-Price{
-    display: inline;
-    text-align: right;
-    float: right;
-}
-
-.submenu-Message{
-    display: inline;
-    text-align: center; 
-    float: center;
-    padding-left: 40px;
-}
-
-.submenu-Calories{
-    display: inline;
-    text-align: left;
-    float: left;
-}
-#itemDescription{
-    font-size: 1.2rem;
+    .submenu-Calories{
+        display: inline;
+        text-align: left;
+        float: left;
+    }
+    #itemDescription{
+        font-size: 1.2rem;
+    }
 }
