@@ -39,7 +39,7 @@ before_cache:
 - rm -rf $HOME/.gradle/caches/*/plugin-resolution/
 before_install:
 - export LANG=en_US.UTF-8
-- nvm install 8
+- nvm install 7
 - npm install -g npm
 - npm install -g ionic cordova
 script:
