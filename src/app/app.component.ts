@@ -8,7 +8,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 @Component({
   templateUrl: 'app.html',
   providers: [OneSignal],
-  styles:[
+  styles: [
 
     '.admin-background {background-color: red}',
     '.norm-background{background-color: blue}'
@@ -17,7 +17,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 export class MyApp {
   rootPage: any = 'HomePage';
   @ViewChild(Nav) nav: Nav;
-  public index : any;
+  public index: any;
   // Setting the root page to HomePage
 
 
@@ -33,16 +33,17 @@ export class MyApp {
     splashScreen: SplashScreen,
     statusBar: StatusBar
   ) {
-      this.platform.ready().then(() => {
-        // Okay, so the platform is ready and our plugins are available.
-        // Here you can do any higher level native things you might need.
-        
+    this.platform.ready().then(() => {
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+
+      if ((<any>window).cordova) {
         //TODO: Figure out why I had to comment the below! 
         statusBar.styleDefault();
         statusBar.backgroundColorByHexString('#165cd3');
         splashScreen.hide();
-        
-  
+
+
         if (this.oneSignal) {
           this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
           this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
@@ -51,30 +52,35 @@ export class MyApp {
           this.oneSignal.handleNotificationOpened().subscribe(() => { });
           this.oneSignal.endInit();
         }
-  
-      });
-    
+      }
+
+    });
+
     this.index = 0;
     // Title + Routes for the Menu
-    
-    this.storage.get('adminRights').then((isAdmin:boolean) => { if (isAdmin) {this.pages=[
 
-      { title: 'Home', component: 'HomePage' },
-      { title: 'Search', component: 'SearchPage' }
-    ];
-    
-    }else {this.pages = [
-      { title: 'Home', component: 'HomePage' }, // Added Home as the first menu option 
-      //Restaurant infomation page
-      { title: 'About Us', component: 'RestaurantinfoPage' },
-      { title: 'Cart', component: 'CartPage' },
-      { title: 'Search', component: 'SearchPage' }
+    this.storage.get('adminRights').then((isAdmin: boolean) => {
+      if (isAdmin) {
+      this.pages = [
 
-    ];
-      
-    }})
-    
-    
+        { title: 'Home', component: 'HomePage' },
+        { title: 'Search', component: 'SearchPage' }
+      ];
+
+      } else {
+      this.pages = [
+        { title: 'Home', component: 'HomePage' }, // Added Home as the first menu option 
+        //Restaurant infomation page
+        { title: 'About Us', component: 'RestaurantinfoPage' },
+        { title: 'Cart', component: 'CartPage' },
+        { title: 'Search', component: 'SearchPage' }
+
+      ];
+
+      }
+    })
+
+
 
     // push admin page if user is an admin
     this.storage.get('adminRights').then((isAdmin: boolean) => {
@@ -110,14 +116,14 @@ export class MyApp {
       this.nav.setRoot('HomePage');
     }
 
-    
+
 
     this.storage.get('token').then((value: string) => {
       if (value != "" && value != null) {
         this.pages.pop();
         this.pages.pop();
-        if(this.index == 1){
-          this.pages.push({title:'Search',component: 'SearchPage'})
+        if (this.index == 1) {
+          this.pages.push({ title: 'Search', component: 'SearchPage' })
           this.index = 0;
         }
         this.pages.push({ title: 'Profile', component: 'ProfilePage' })
