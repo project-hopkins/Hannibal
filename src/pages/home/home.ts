@@ -16,6 +16,7 @@ export class HomePage {
   public menuItems;
   public itemsInSubmenu: Object;
   private menuCategories: Array<string> = ["Starter", "Salads", "Entrees", "Dessert"];
+  private isAdmin: boolean;
 
   constructor(
     public navCtrl: NavController,
@@ -75,6 +76,8 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
     this.storage.get('token').then((value: string) => {
       console.log(value)
-    })
+    });
+    this.storage.get('adminRights').then(isAdmin => this.isAdmin = isAdmin);
+
   }
 }

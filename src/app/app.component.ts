@@ -10,9 +10,11 @@ import { OneSignal } from '@ionic-native/onesignal';
   providers: [OneSignal]
 })
 export class MyApp {
-  rootPage: any = 'HomePage';
+
   @ViewChild(Nav) nav: Nav;
+  rootPage: any = 'HomePage';
   public index: any;
+  public isAdmin: boolean;
   // Setting the root page to HomePage
 
 
@@ -56,21 +58,21 @@ export class MyApp {
 
     this.storage.get('adminRights').then((isAdmin: boolean) => {
       if (isAdmin) {
-      this.pages = [
+        this.pages = [
 
-        { title: 'Home', component: 'HomePage' },
-        { title: 'Search', component: 'SearchPage' }
-      ];
+          { title: 'Home', component: 'HomePage' },
+          { title: 'Search', component: 'SearchPage' }
+        ];
 
       } else {
-      this.pages = [
-        { title: 'Home', component: 'HomePage' }, // Added Home as the first menu option 
-        //Restaurant infomation page
-        { title: 'About Us', component: 'RestaurantinfoPage' },
-        { title: 'Cart', component: 'CartPage' },
-        { title: 'Search', component: 'SearchPage' }
+        this.pages = [
+          { title: 'Home', component: 'HomePage' }, // Added Home as the first menu option 
+          //Restaurant infomation page
+          { title: 'About Us', component: 'RestaurantinfoPage' },
+          { title: 'Cart', component: 'CartPage' },
+          { title: 'Search', component: 'SearchPage' }
 
-      ];
+        ];
 
       }
     })
@@ -80,6 +82,7 @@ export class MyApp {
     // push admin page if user is an admin
     this.storage.get('adminRights').then((isAdmin: boolean) => {
       if (isAdmin) { this.pages.push({ title: 'Admin', component: 'AdminPage' }) }
+      this.isAdmin = isAdmin;
     })
 
     // if token is available show login page
