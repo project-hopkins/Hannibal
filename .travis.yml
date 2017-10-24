@@ -42,6 +42,7 @@ before_install:
 - nvm install 8
 - yarn global add ionic cordova
 script:
+- yarn cache clean
 - yarn install
 - ionic cordova build android
 env:
