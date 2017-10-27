@@ -23,10 +23,10 @@
         <ion-avatar item-left>
           <img src="assets/images/account.svg">
         </ion-avatar>
-        <p>Display Name : {{personalInformation.username}}</p>
-        <p>First Name : {{fullName.firstName}}</p>
-        <p>Last Name : {{fullName.lastName}}</p>
-        <p>Email : {{personalInformation.email}}</p>
+        <p>Display Name : {{user.username}}</p>
+        <p>First Name : {{userFullName.firstName}}</p>
+        <p>Last Name : {{userFullName.lastName}}</p>
+        <p>Email : {{user.email}}</p>
       </ion-item>
     </ion-item-group>
     <ion-item-group>
@@ -45,8 +45,8 @@
         <ion-avatar item-left>
           <img src="assets/images/address.png">
         </ion-avatar>
-        <p>Address : {{addressInformation.number}} {{addressInformation.name}} {{addressInformation.streetType}}</p>
-        <p>Postal Code : {{addressInformation.postalCode}}</p>
+        <p>Address : {{userAddress.number}} {{userAddress.name}} {{userAddress.streetType}}</p>
+        <p>Postal Code : {{userAddress.postalCode}}</p>
       </ion-item>
     </ion-item-group>
     <br />
@@ -64,7 +64,7 @@
         <div *ngIf="order.delivery == 'False'">
           <p>Takeout</p>
         </div>
-        <p>Total Price : ${{order.total}} </p>
+        <p>Total Price : ${{orders.total}} </p>
       </ion-item>
     </ion-item-group>
   </ion-list>

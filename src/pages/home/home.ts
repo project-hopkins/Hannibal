@@ -5,16 +5,20 @@ import { Http } from '@angular/http';
 import { MenuCallService } from '../../services/getMenu';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
+import { userService } from '../../services/userService';
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [MenuCallService]
+  providers: [MenuCallService, userService]
 })
 export class HomePage {
   public menuItems;
+  public SubMenuPage = SubmenuPage;
   public itemsInSubmenu: Object
+  public user: Object;
+  public userAddress: Object;
 
   constructor(
     public navCtrl: NavController,
@@ -22,12 +26,15 @@ export class HomePage {
     public http: Http,
     private menuCall: MenuCallService,
     private storage: Storage,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private userService: userService
   ) {
+    this.user = new Object;
+    this.userAddress = new Object;
     let loading: Loading = this.loadingCtrl.create({});
-    loading.present();
-
-    this.itemsInSubmenu = {
+    loading.present();    
+    
+     this.itemsInSubmenu = {
       'Starter': 0,
       'Salad': 0,
       'Entree': 0,
@@ -66,15 +73,21 @@ export class HomePage {
       console.log('###### From HOME START ######')
       console.log(menuItems)
       console.log('###### From HOME END ######')
-      this.navCtrl.push('SubmenuPage', { data: menuItems }).then(() => loading.dismiss())
+      this.navCtrl.push(this.SubMenuPage, { data: menuItems }).then(() => loading.dismiss())
     })
 
   }
 
   ionViewDidLoad() {
+    this.userService.GetUserInfo()    
+      this.storage.get('fullName').then((val)=>{
+      this.user = val;
+    });
+    this.storage.get('userAddress').then((userAddress)=>{
+      this.userAddress=userAddress;
+    });
     console.log('ionViewDidLoad HomePage');
     this.storage.get('token').then((value: string) => {
-      console.log(value)
     })
   }
 }
