@@ -18,7 +18,6 @@ export class HomePage {
   public SubMenuPage = SubmenuPage;
   public itemsInSubmenu: Object
   public user: Object;
-  public userAddress: Object;
 
   constructor(
     public navCtrl: NavController,
@@ -30,11 +29,10 @@ export class HomePage {
     private userService: userService
   ) {
     this.user = new Object;
-    this.userAddress = new Object;
     let loading: Loading = this.loadingCtrl.create({});
-    loading.present();    
-    
-     this.itemsInSubmenu = {
+    loading.present();
+
+    this.itemsInSubmenu = {
       'Starter': 0,
       'Salad': 0,
       'Entree': 0,
@@ -44,22 +42,18 @@ export class HomePage {
     this.http.get(`https://keanubackend.herokuapp.com/item/category/Starter/count`).map(res => res.json()).subscribe(
       data => {
         this.itemsInSubmenu['Starter'] = data.data.count;
-        console.log(data.data.count);
       });
     this.http.get(`https://keanubackend.herokuapp.com/item/category/Salads/count`).map(res => res.json()).subscribe(
       data => {
         this.itemsInSubmenu['Salad'] = data.data.count;
-        console.log(data.data.count);
       });
     this.http.get(`https://keanubackend.herokuapp.com/item/category/Entrees/count`).map(res => res.json()).subscribe(
       data => {
         this.itemsInSubmenu['Entree'] = data.data.count;
-        console.log(data.data.count);
       });
     this.http.get(`https://keanubackend.herokuapp.com/item/category/Dessert/count`).map(res => res.json()).subscribe(
       data => {
         this.itemsInSubmenu['Dessert'] = data.data.count;
-        console.log(data.data.count);
       });
 
     this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
@@ -70,21 +64,16 @@ export class HomePage {
     loading.present();
 
     this.menuCall.getMenu(type).then((menuItems: Array<any>) => {
-      console.log('###### From HOME START ######')
-      console.log(menuItems)
-      console.log('###### From HOME END ######')
       this.navCtrl.push(this.SubMenuPage, { data: menuItems }).then(() => loading.dismiss())
     })
 
   }
 
   ionViewDidLoad() {
-    this.userService.GetUserInfo()    
-      this.storage.get('fullName').then((val)=>{
+    //Calls the GetUserInfo() function so it will store all the users info locally for use throughout the project
+    this.userService.GetUserInfo()
+    this.storage.get('userFullDetails').then((val) => {
       this.user = val;
-    });
-    this.storage.get('userAddress').then((userAddress)=>{
-      this.userAddress=userAddress;
     });
     console.log('ionViewDidLoad HomePage');
     this.storage.get('token').then((value: string) => {
