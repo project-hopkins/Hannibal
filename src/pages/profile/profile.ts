@@ -36,8 +36,7 @@ export class ProfilePage {
     this.userAddress = new Object;
   }
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-    this.userService.GetUserInfo()    
+    console.log('ionViewDidLoad ProfilePage');  
     this.storage.get('fullName').then((val)=>{
     this.userFullName = val;
   });
