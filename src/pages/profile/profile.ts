@@ -20,7 +20,7 @@ export class ProfilePage {
   constructor(public navParams: NavParams,
     private storage: Storage,
     private userService: userService) {
-    this.user = new Object;
+    this.user = new Object();
   }
   ionViewDidLoad() {
     //Gets the Users full details from local storage for use on page
