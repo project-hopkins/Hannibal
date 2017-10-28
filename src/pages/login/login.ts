@@ -3,10 +3,11 @@ import { Storage } from '@ionic/storage';
 import { Http, Headers } from '@angular/http';
 import { NavController, NavParams, LoadingController, AlertController, IonicPage } from 'ionic-angular';
 import { HomePage } from '../home/home';
+
+import { RegisterPage } from '../register/register';
 import 'rxjs/Rx';
 /*
   Class for the Login page.
-
 */
 @IonicPage()
 @Component({
@@ -17,7 +18,7 @@ export class LoginPage {
 
   public username: string;
   public password: string;  
-
+  registerPage = RegisterPage  
 
   constructor(
     private navCtrl: NavController,
@@ -36,7 +37,6 @@ export class LoginPage {
   // ionViewDidLoad() {
   //   console.log('ionViewDidLoad LoginPage');
   // }
-
   public login():void{
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
@@ -64,12 +64,14 @@ export class LoginPage {
                 subTitle: 'Login Successful. Redirecting to homepage!',
                 buttons: ['OK']
               }).present();
-              this.navCtrl.setRoot(HomePage);
+             this.navCtrl.setRoot(HomePage);
             }
         );
   }
+
+
   public GoToRegisterPage(){
+
     this.navCtrl.push('RegisterPage');
   }
-
 }

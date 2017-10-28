@@ -2,10 +2,7 @@ import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { NavController, NavParams, IonicPage } from 'ionic-angular';
 
-/*
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+
 @IonicPage()
 @Component({
   selector: 'page-register',
