@@ -5,12 +5,13 @@ import { Http } from '@angular/http';
 import { MenuCallService } from '../../services/getMenu';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
+import { userService } from '../../services/userService';
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [MenuCallService]
+  providers: [MenuCallService, userService]
 })
 export class HomePage {
   public menuItems;
@@ -23,13 +24,13 @@ export class HomePage {
     public http: Http,
     private menuCall: MenuCallService,
     private storage: Storage,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController,
+    private userService: userService) {
 
     let loading: Loading = this.loadingCtrl.create({});
     loading.present();
 
     // Instantiate the itemsInSubMenu object with 0 for each item
-
     this.itemsInSubmenu = {
       'Starter': 0,
       'Salads': 0,
@@ -72,6 +73,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
+    this.userService.GetUserInfo()
     console.log('ionViewDidLoad HomePage');
     this.storage.get('token').then((value: string) => {
       console.log(value)

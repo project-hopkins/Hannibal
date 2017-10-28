@@ -41,11 +41,6 @@
         <ion-label floating>Name On The Card</ion-label>
         <ion-input type="text" [(ngModel)]="paymentInfo.name"></ion-input>
       </ion-item>
-
-      <!--<ion-item>
-        <ion-label floating>Credit Card Type</ion-label>
-        <ion-input type="text" [(ngModel)]="paymentInfo.cardType"></ion-input>
-      </ion-item>-->
       <ion-item>
         <ion-label>Card Type</ion-label>
         <ion-select [(ngModel)]="paymentInfo.cardType">
@@ -58,14 +53,8 @@
         <ion-label floating>Credit Card Number</ion-label>
         <ion-input type="text" [(ngModel)]="paymentInfo.num"></ion-input>
       </ion-item>
-
-      <!--<ion-item>
-      <ion-label>Date</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MMMM DD YYYY" [(ngModel)]="paymentInfo.expiry"></ion-datetime>
-    </ion-item>-->
     </div>
   </ion-list>
-
   <div padding>
     <button block ion-button (click)="Register($event)">Register!</button>
   </div>

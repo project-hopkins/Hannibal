@@ -27,7 +27,7 @@ import { MyApp } from './app.component';
     useClass: IonicErrorHandler}, 
     OneSignal,
     StatusBar,
-    SplashScreen,
+    SplashScreen
   ]
 })
 export class AppModule {}
