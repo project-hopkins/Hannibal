@@ -1,9 +1,7 @@
 {
-  "name": "Keanu",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {
-    "cordova": {}
-  }
 
+  "name": "",
+  "app_id": "d94c1be2",
+  "integrations": {},
+  "type": "ionic-angular"
 }
