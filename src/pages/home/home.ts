@@ -15,14 +15,8 @@ import { userService } from '../../services/userService';
 })
 export class HomePage {
   public menuItems;
-
-  public SubMenuPage = SubmenuPage;
-  public itemsInSubmenu: Object
-  public user: Object;
-
   public itemsInSubmenu: Object;
   private menuCategories: Array<string> = ["Starter", "Salads", "Entrees", "Dessert"];
-
 
   constructor(
     public navCtrl: NavController,
@@ -31,42 +25,18 @@ export class HomePage {
     private menuCall: MenuCallService,
     private storage: Storage,
     private loadingCtrl: LoadingController,
-    private userService: userService
-  ) {
-    this.user = new Object;
-    private loadingCtrl: LoadingController) {
+    private userService: userService) {
+
     let loading: Loading = this.loadingCtrl.create({});
     loading.present();
 
     // Instantiate the itemsInSubMenu object with 0 for each item
-
     this.itemsInSubmenu = {
       'Starter': 0,
       'Salads': 0,
       'Entrees': 0,
       'Dessert': 0
-
-    };
-
-    this.http.get(`https://keanubackend.herokuapp.com/item/category/Starter/count`).map(res => res.json()).subscribe(
-      data => {
-        this.itemsInSubmenu['Starter'] = data.data.count;
-      });
-    this.http.get(`https://keanubackend.herokuapp.com/item/category/Salads/count`).map(res => res.json()).subscribe(
-      data => {
-        this.itemsInSubmenu['Salad'] = data.data.count;
-      });
-    this.http.get(`https://keanubackend.herokuapp.com/item/category/Entrees/count`).map(res => res.json()).subscribe(
-      data => {
-        this.itemsInSubmenu['Entree'] = data.data.count;
-      });
-    this.http.get(`https://keanubackend.herokuapp.com/item/category/Dessert/count`).map(res => res.json()).subscribe(
-      data => {
-        this.itemsInSubmenu['Dessert'] = data.data.count;
-      });
-
     }
-
 
     this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
 
@@ -75,7 +45,7 @@ export class HomePage {
       this.http.get(`https://keanubackend.herokuapp.com/item/category/${element}/count`).map(res => res.json()).subscribe(
         data => {
           this.itemsInSubmenu[element] = data.data.count;
-        
+          console.log(element + " " + data.data.count);
         });
     });
   }
@@ -94,23 +64,19 @@ export class HomePage {
     loading.present();
 
     this.menuCall.getMenu(type).then((menuItems: Array<any>) => {
-
-      this.navCtrl.push(this.SubMenuPage, { data: menuItems }).then(() => loading.dismiss())
-     
+      /* console.log('###### From HOME START ######')
+      console.log(menuItems)
+      console.log('###### From HOME END ######') */
       this.navCtrl.push('SubmenuPage', { data: menuItems }).then(() => loading.dismiss())
-
     })
 
   }
 
   ionViewDidLoad() {
-    //Calls the GetUserInfo() function so it will store all the users info locally for use throughout the project
     this.userService.GetUserInfo()
-    this.storage.get('userFullDetails').then((val) => {
-      this.user = val;
-    });
     console.log('ionViewDidLoad HomePage');
     this.storage.get('token').then((value: string) => {
+      console.log(value)
     })
   }
 }
