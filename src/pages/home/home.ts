@@ -11,7 +11,6 @@ import { UserService } from '../../services/userService';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-
 })
 export class HomePage {
   public menuItems;
@@ -43,26 +42,20 @@ export class HomePage {
     
   }
 
-  // The following method is already in a service. Althought it doesnt really need it. 
+
   /**
+   * The following method is already in a service. Althought it doesnt really need it. 
+   * 
    * Method that activates when a menu item is clicked.
    * Sends the string of the menu item clicked (ie. starter) to the backend and retrieves the food items from that menu.
    * Sends this data to the next page.
-   * 
    * @param {string} type 
+   * @returns {Promise<any>} 
    * @memberof HomePage
    */
-  public launchSubMenuPage(type: string): void {
-    let loading: Loading = this.loadingCtrl.create({})
-    loading.present();
-
-    this.menuCall.getMenu(type).then((menuItems: Array<any>) => {
-      /* console.log('###### From HOME START ######')
-      console.log(menuItems)
-      console.log('###### From HOME END ######') */
-      this.navCtrl.push('SubmenuPage', { data: menuItems }).then(() => loading.dismiss())
-    })
-
+  public async launchSubMenuPage(type: string): Promise<any> {
+    let menuItems=  await this.menuCall.getMenu(type);
+    this.navCtrl.push('SubmenuPage', { data: menuItems });
   }
 
   ionViewDidLoad() {
