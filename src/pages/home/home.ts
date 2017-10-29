@@ -5,13 +5,13 @@ import { Http } from '@angular/http';
 import { MenuCallService } from '../../services/getMenu';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
-import { userService } from '../../services/userService';
+import { UserService } from '../../services/userService';
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [MenuCallService, userService]
+
 })
 export class HomePage {
   public menuItems;
@@ -25,7 +25,7 @@ export class HomePage {
     private menuCall: MenuCallService,
     private storage: Storage,
     private loadingCtrl: LoadingController,
-    private userService: userService) {
+    private userService: UserService) {
 
     let loading: Loading = this.loadingCtrl.create({});
     loading.present();
@@ -39,15 +39,8 @@ export class HomePage {
     }
 
     this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
-
-    // Grabs the number of items in each menu category.
-    this.menuCategories.forEach(element => {
-      this.http.get(`https://keanubackend.herokuapp.com/item/category/${element}/count`).map(res => res.json()).subscribe(
-        data => {
-          this.itemsInSubmenu[element] = data.data.count;
-          console.log(element + " " + data.data.count);
-        });
-    });
+    this._getCategoriesCount();
+    
   }
 
   // The following method is already in a service. Althought it doesnt really need it. 
@@ -78,5 +71,22 @@ export class HomePage {
     this.storage.get('token').then((value: string) => {
       console.log(value)
     })
+  }
+
+
+  /**
+   * Grabs the number of items in each menu category.
+   * 
+   * @private
+   * @memberof HomePage
+   */
+  private _getCategoriesCount():void{
+    this.menuCategories.forEach(element => {
+      this.http.get(`https://keanubackend.herokuapp.com/item/category/${element}/count`).map(res => res.json()).subscribe(
+        data => {
+          this.itemsInSubmenu[element] = data.data.count;
+          console.log(element + " " + data.data.count);
+        });
+    });
   }
 }
