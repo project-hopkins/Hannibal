@@ -23,6 +23,6 @@ export class ProfilePage {
     this.storage.get('userFullDetails').then((val) => {
       this.user = val;
     });
-    this.userService.GetOrderHistory();
+    this.userService.getOrderHistory();
   }
 }

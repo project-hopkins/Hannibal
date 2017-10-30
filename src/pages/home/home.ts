@@ -59,7 +59,7 @@ export class HomePage {
   }
 
   ionViewDidLoad() {
-    this.userService.GetUserInfo()
+    this.userService.getUserInfo()
     console.log('ionViewDidLoad HomePage');
     this.storage.get('token').then((value: string) => {
       console.log(value)

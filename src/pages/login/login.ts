@@ -4,7 +4,6 @@ import { Http, Headers } from '@angular/http';
 import { NavController, NavParams, LoadingController, AlertController, IonicPage } from 'ionic-angular';
 import { HomePage } from '../home/home';
 
-import { RegisterPage } from '../register/register';
 import 'rxjs/Rx';
 /*
   Class for the Login page.
@@ -17,8 +16,7 @@ import 'rxjs/Rx';
 export class LoginPage {
 
   public username: string;
-  public password: string;  
-  registerPage = RegisterPage  
+  public password: string;
 
   constructor(
     private navCtrl: NavController,
@@ -27,17 +25,13 @@ export class LoginPage {
     private storage: Storage,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController
-  )
-  {
-
-    this.username='';
-    this.password='';    
+  ) {
+    this.username = '';
+    this.password = '';
   }
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad LoginPage');
-  // }
-  public login():void{
+
+  public login(): void {
     let loader = this.loadingCtrl.create({
       content: "Please wait...",
       duration: 3000
@@ -46,31 +40,31 @@ export class LoginPage {
 
     let headers = new Headers({ 'username': this.username, 'password': this.password });
 
-    this.http.post("https://keanubackend.herokuapp.com/login", null,{ headers: headers })
-        .subscribe(
-            data => {
-              console.log(data.json()['data']['token']);
-              this.storage.set('token',data.json()['data']['token'])
-              this.storage.set('adminRights',data.json()['data']['adminRights'])
-            },
-            err => {
-              console.log("ERROR!: ", err);
-            },
-            ()=>{
-              console.log('posted login done')
-              loader.dismiss();
-              this.alertCtrl.create({
-                title: 'Login Confirmation',
-                subTitle: 'Login Successful. Redirecting to homepage!',
-                buttons: ['OK']
-              }).present();
-             this.navCtrl.setRoot(HomePage);
-            }
-        );
+    this.http.post("https://keanubackend.herokuapp.com/login", null, { headers: headers })
+      .subscribe(
+      data => {
+        console.log(data.json()['data']['token']);
+        this.storage.set('token', data.json()['data']['token'])
+        this.storage.set('adminRights', data.json()['data']['adminRights'])
+      },
+      err => {
+        console.log("ERROR!: ", err);
+      },
+      () => {
+        console.log('posted login done')
+        loader.dismiss();
+        this.alertCtrl.create({
+          title: 'Login Confirmation',
+          subTitle: 'Login Successful. Redirecting to homepage!',
+          buttons: ['OK']
+        }).present();
+        this.navCtrl.setRoot(HomePage);
+      }
+      );
   }
 
 
-  public GoToRegisterPage(){
+  public GoToRegisterPage() {
 
     this.navCtrl.push('RegisterPage');
   }

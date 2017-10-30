@@ -16,12 +16,16 @@ export class UserService {
     }
     
 
+    public login():boolean{
+        return true
+    }
+
     /**
      * Gets Users info and stores it locally so the information can be used throughout the app
      * 
      * @memberof userService
      */
-    public GetUserInfo(): void {
+    public getUserInfo(): void {
         //This is where we get the token for the backend validation
         this.storage.get('token').then(value => {
             //Creates a header for the get request
@@ -47,7 +51,7 @@ export class UserService {
      * 
      * @memberof userService
      */
-    public GetOrderHistory(): void {
+    public getOrderHistory(): void {
         this.storage.get('token').then(value => {
             let headers = new Headers();
             headers.append('token', value)
