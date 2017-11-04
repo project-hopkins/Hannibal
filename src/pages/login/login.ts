@@ -1,3 +1,4 @@
+import { UserService } from '../../services/userService';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Http, Headers } from '@angular/http';
@@ -24,7 +25,8 @@ export class LoginPage {
     private http: Http,
     private storage: Storage,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private userService: UserService
   ) {
     this.username = '';
     this.password = '';
@@ -37,6 +39,14 @@ export class LoginPage {
       duration: 3000
     });
     loader.present();
+
+    this.userService.login(this.username, this.password)
+      .then(data => {
+        console.log('**************');
+        console.log(data);
+        console.log('**************');
+      })
+      .catch(err => console.log(err))
 
     let headers = new Headers({ 'username': this.username, 'password': this.password });
 

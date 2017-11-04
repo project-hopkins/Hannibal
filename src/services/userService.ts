@@ -1,23 +1,34 @@
+import { Subject } from 'rxjs/Rx';
+import { async } from '@angular/core/testing';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export class UserService {
-    public orders: Array<Object>
+
+    public orders: Array<Object>;
+    private _isAdmin: Subject<boolean>;
 
     constructor(
         private http: Http,
         public request: RequestOptions,
-        public storage: Storage,
-        //public headers: Headers
+        public storage: Storage
     ) {
-        this.orders = new Array<Object>()
+        this.orders = new Array<Object>();
+        this._isAdmin = new Subject<boolean>();
     }
-    
 
-    public login():boolean{
-        return true
+
+    public async login(username: string, password: string): Promise<any> {
+        let headers = new Headers({ 'username': username, 'password': password });
+        return this.http.post('https://keanubackend.herokuapp.com/login', null, { headers: headers })
+            .map(res => {
+                // this._isAdmin
+                this._isAdmin.next(res.json().data.adminRights);
+                return res.json().data
+            })
+            .toPromise();
     }
 
     /**
