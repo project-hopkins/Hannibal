@@ -1,8 +1,9 @@
-import { Subject } from 'rxjs/Rx';
+import { Subject, Observable } from 'rxjs/Rx';
 import { async } from '@angular/core/testing';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
+
 
 @Injectable()
 export class UserService {
@@ -20,15 +21,29 @@ export class UserService {
     }
 
 
-    public async login(username: string, password: string): Promise<any> {
+    public login(username: string, password: string): Observable<any> {
         let headers = new Headers({ 'username': username, 'password': password });
         return this.http.post('https://keanubackend.herokuapp.com/login', null, { headers: headers })
-            .map(res => {
-                // this._isAdmin
-                this._isAdmin.next(res.json().data.adminRights);
-                return res.json().data
-            })
-            .toPromise();
+            .map(res => res.json())
+            .do(
+                (data)=>{
+                    // TODO SET STORAGE HERE 
+                    console.log('in service')
+                    console.log(data)
+                }
+            )
+
+            // {
+            //     // this._isAdmin
+            //     console.log('in map function');
+            //     let response = res.json();
+            //     console.log('*******************');
+            //     console.log(response);
+            //     console.log('*******************');
+            //     // this._isAdmin.next(response.data.adminRights);
+            //     return res.json().data
+            // }
+
     }
 
     /**

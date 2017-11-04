@@ -40,37 +40,42 @@ export class LoginPage {
     });
     loader.present();
 
-    this.userService.login(this.username, this.password)
-      .then(data => {
-        console.log('**************');
-        console.log(data);
-        console.log('**************');
-      })
-      .catch(err => console.log(err))
-
-    let headers = new Headers({ 'username': this.username, 'password': this.password });
-
-    this.http.post("https://keanubackend.herokuapp.com/login", null, { headers: headers })
-      .subscribe(
-      data => {
-        console.log(data.json()['data']['token']);
-        this.storage.set('token', data.json()['data']['token'])
-        this.storage.set('adminRights', data.json()['data']['adminRights'])
-      },
-      err => {
-        console.log("ERROR!: ", err);
-      },
-      () => {
-        console.log('posted login done')
-        loader.dismiss();
-        this.alertCtrl.create({
-          title: 'Login Confirmation',
-          subTitle: 'Login Successful. Redirecting to homepage!',
-          buttons: ['OK']
-        }).present();
-        this.navCtrl.setRoot(HomePage);
+    this.userService.login(this.username, this.password).subscribe(
+      data => console.log(data),
+      (err)=>{
+        if(err.status == 403 ){
+          this.alertCtrl.create({
+            title: 'Login Error',
+            message: err.json().error,
+            buttons: ['OK']
+          }).present();
+        }
       }
-      );
+    );
+
+    // let headers = new Headers({ 'username': this.username, 'password': this.password });
+
+    // this.http.post("https://keanubackend.herokuapp.com/login", null, { headers: headers })
+    //   .subscribe(
+    //   data => {
+    //     console.log(data.json()['data']['token']);
+    //     this.storage.set('token', data.json()['data']['token'])
+    //     this.storage.set('adminRights', data.json()['data']['adminRights'])
+    //   },
+    //   err => {
+    //     console.log("ERROR!: ", err);
+    //   },
+    //   () => {
+    //     console.log('posted login done')
+    //     loader.dismiss();
+    //     this.alertCtrl.create({
+    //       title: 'Login Confirmation',
+    //       subTitle: 'Login Successful. Redirecting to homepage!',
+    //       buttons: ['OK']
+    //     }).present();
+    //     this.navCtrl.setRoot(HomePage);
+    //   }
+    //   );
   }
 
 
