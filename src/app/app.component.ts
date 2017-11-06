@@ -1,10 +1,11 @@
-import { UserService } from '../services/userService';
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform, Events, AlertController } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { Storage } from '@ionic/storage';
 import { OneSignal } from '@ionic-native/onesignal';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { Storage } from '@ionic/storage';
+import { AlertController, Events, Nav, Platform } from 'ionic-angular';
+
+import { UserService } from '../services/userService';
 
 @Component({
   templateUrl: 'app.html',
@@ -16,9 +17,10 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   public index: any;
 
+  // set default stat as LoggedOut
   public loginState: LoginState = LoginState.LoggedOut;
 
-  pages: Array<{ title: string, component: string, access?: number }>;
+  pages: Array<{ title: string, component: string, access: number }>;
 
 
   constructor(
