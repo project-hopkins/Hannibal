@@ -9,15 +9,23 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
     public orders: Array<Object>;
-    private _isAdmin: Subject<boolean>;
+    
+    public isAdmin: Subject<boolean>;
+    public isLoggedIn: Subject<boolean>;
 
-    constructor(
-        private http: Http,
-        public request: RequestOptions,
-        public storage: Storage
-    ) {
+    /**
+     * Creates an instance of UserService.
+     * @param {Http} http 
+     * @param {RequestOptions} request 
+     * @param {Storage} storage 
+     * @memberof UserService
+     */
+    constructor(private http: Http,public request: RequestOptions, public storage: Storage) {
         this.orders = new Array<Object>();
-        this._isAdmin = new Subject<boolean>();
+        this.isAdmin = new Subject<boolean>();
+        this.isLoggedIn = new Subject<boolean>();
+
+        this.isLoggedIn.next(false);
     }
 
 
@@ -29,9 +37,17 @@ export class UserService {
                 async (data)=>{
                     await this.storage.set('token', data.token);
                     await this.storage.set('adminRights', data.adminRights);
+                    this.isLoggedIn.next(true);
+                    this.isAdmin.next(data.adminRights);
                 }
             );
+    }
 
+    public async logout():Promise<any>{
+        this.isLoggedIn.next(false);
+        this.isAdmin.next(false);
+        await this.storage.remove('token');
+        await this.storage.remove('adminRights');
     }
 
     /**
