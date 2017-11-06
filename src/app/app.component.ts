@@ -32,20 +32,23 @@ export class MyApp {
         // Okay, so the platform is ready and our plugins are available.
         // Here you can do any higher level native things you might need.
         
+
         //TODO: Figure out why I had to comment the below! 
-        statusBar.styleDefault();
-        statusBar.backgroundColorByHexString('#165cd3');
-        splashScreen.hide();
+        if (this.platform.is('cordova')) {
+          statusBar.styleDefault();
+          statusBar.backgroundColorByHexString('#165cd3');
+          splashScreen.hide();
         
   
-        if (this.oneSignal) {
-          this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
-          this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
-          this.oneSignal.setSubscription(true);
-          this.oneSignal.handleNotificationReceived().subscribe(() => { });
-          this.oneSignal.handleNotificationOpened().subscribe(() => { });
-          this.oneSignal.endInit();
-        }
+          if (this.oneSignal) {
+            this.oneSignal.startInit('0c73a76c-be9a-4c17-ab9e-0ad31cbaa349', '1031321310203');
+            this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+            this.oneSignal.setSubscription(true);
+            this.oneSignal.handleNotificationReceived().subscribe(() => { });
+            this.oneSignal.handleNotificationOpened().subscribe(() => { });
+            this.oneSignal.endInit();
+          }
+      }
   
       });
     
