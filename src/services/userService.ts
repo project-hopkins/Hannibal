@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class UserService {
 
     public orders: Array<Object>;
-    
+
     public isAdmin: Subject<boolean>;
     public isLoggedIn: Subject<boolean>;
 
@@ -19,7 +19,7 @@ export class UserService {
      * @param {Storage} storage 
      * @memberof UserService
      */
-    constructor(private http: Http,public request: RequestOptions, public storage: Storage) {
+    constructor(private http: Http, public request: RequestOptions, public storage: Storage) {
         this.orders = new Array<Object>();
         this.isAdmin = new Subject<boolean>();
         this.isLoggedIn = new Subject<boolean>();
@@ -30,35 +30,58 @@ export class UserService {
         this._checkLoggedIn();
     }
 
-    private async _checkLoggedIn():Promise<any>{
+    /**
+     * 
+     * Check if the user is already logged in
+     * 
+     * @private
+     * @returns {Promise<any>} 
+     * @memberof UserService
+     */
+    private async _checkLoggedIn(): Promise<any> {
         let token = await this.storage.get('token');
         let admin = await this.storage.get('adminRights');
-        
+
         if (token) { this.isLoggedIn.next(true); }
         admin ? this.isAdmin.next(true) : this.isAdmin.next(false);
     }
-    
 
 
+    /**
+     * Login in a user and set the users token
+     * and if they are an admin
+     * 
+     * @param {string} username 
+     * @param {string} password 
+     * @returns {Observable<any>} 
+     * @memberof UserService
+     */
     public login(username: string, password: string): Observable<any> {
         let headers = new Headers({ 'username': username, 'password': password });
         return this.http.post('https://keanubackend.herokuapp.com/login', null, { headers: headers })
             .map(res => res.json().data)
             .do(
-                async (data)=>{
-                    await this.storage.set('token', data.token);
-                    await this.storage.set('adminRights', data.adminRights);
-                    this.isLoggedIn.next(true);
-                    this.isAdmin.next(data.adminRights);
-                }
+            async (data) => {
+                await this.storage.set('token', data.token);
+                await this.storage.set('adminRights', data.adminRights);
+                this.isLoggedIn.next(true);
+                this.isAdmin.next(data.adminRights);
+            }
             );
     }
 
-    public async logout():Promise<any>{
-        this.isLoggedIn.next(false);
-        this.isAdmin.next(false);
+    /**
+     * Removes stored user info
+     * 
+     * @returns {Promise<any>} 
+     * @memberof UserService
+     */
+    public async logout(): Promise<any> {
         await this.storage.remove('token');
         await this.storage.remove('adminRights');
+        await this.storage.remove('userFullDetails');
+        this.isLoggedIn.next(false);
+        this.isAdmin.next(false);
     }
 
     /**
