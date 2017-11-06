@@ -1,8 +1,7 @@
-import { Subject, Observable } from 'rxjs/Rx';
-import { async } from '@angular/core/testing';
-import { Http, RequestOptions, Headers } from '@angular/http';
-import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
+import { Headers, Http, RequestOptions } from '@angular/http';
+import { Storage } from '@ionic/storage';
+import { Observable, Subject } from 'rxjs/Rx';
 
 
 @Injectable()
@@ -26,7 +25,19 @@ export class UserService {
         this.isLoggedIn = new Subject<boolean>();
 
         this.isLoggedIn.next(false);
+        this.isAdmin.next(false);
+
+        this._checkLoggedIn();
     }
+
+    private async _checkLoggedIn():Promise<any>{
+        let token = await this.storage.get('token');
+        let admin = await this.storage.get('adminRights');
+        
+        if (token) { this.isLoggedIn.next(true); }
+        admin ? this.isAdmin.next(true) : this.isAdmin.next(false);
+    }
+    
 
 
     public login(username: string, password: string): Observable<any> {
