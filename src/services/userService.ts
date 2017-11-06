@@ -24,25 +24,13 @@ export class UserService {
     public login(username: string, password: string): Observable<any> {
         let headers = new Headers({ 'username': username, 'password': password });
         return this.http.post('https://keanubackend.herokuapp.com/login', null, { headers: headers })
-            .map(res => res.json())
+            .map(res => res.json().data)
             .do(
-                (data)=>{
-                    // TODO SET STORAGE HERE 
-                    console.log('in service')
-                    console.log(data)
+                async (data)=>{
+                    await this.storage.set('token', data.token);
+                    await this.storage.set('adminRights', data.adminRights);
                 }
-            )
-
-            // {
-            //     // this._isAdmin
-            //     console.log('in map function');
-            //     let response = res.json();
-            //     console.log('*******************');
-            //     console.log(response);
-            //     console.log('*******************');
-            //     // this._isAdmin.next(response.data.adminRights);
-            //     return res.json().data
-            // }
+            );
 
     }
 

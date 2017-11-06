@@ -34,48 +34,25 @@ export class LoginPage {
 
 
   public login(): void {
-    let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 3000
-    });
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });
     loader.present();
 
     this.userService.login(this.username, this.password).subscribe(
-      data => console.log(data),
-      (err)=>{
-        if(err.status == 403 ){
-          this.alertCtrl.create({
-            title: 'Login Error',
-            message: err.json().error,
-            buttons: ['OK']
-          }).present();
-        }
-      }
+      data => this.navCtrl.setRoot('HomePage'),
+      (err) => {
+        loader.dismiss().then(data => {
+          if (err.status == 403) {
+            this.alertCtrl.create({
+              title: 'Login Error',
+              message: err.json().error,
+              buttons: ['OK']
+            }).present();
+          }
+        })
+
+      },
+      () => loader.dismiss()
     );
-
-    // let headers = new Headers({ 'username': this.username, 'password': this.password });
-
-    // this.http.post("https://keanubackend.herokuapp.com/login", null, { headers: headers })
-    //   .subscribe(
-    //   data => {
-    //     console.log(data.json()['data']['token']);
-    //     this.storage.set('token', data.json()['data']['token'])
-    //     this.storage.set('adminRights', data.json()['data']['adminRights'])
-    //   },
-    //   err => {
-    //     console.log("ERROR!: ", err);
-    //   },
-    //   () => {
-    //     console.log('posted login done')
-    //     loader.dismiss();
-    //     this.alertCtrl.create({
-    //       title: 'Login Confirmation',
-    //       subTitle: 'Login Successful. Redirecting to homepage!',
-    //       buttons: ['OK']
-    //     }).present();
-    //     this.navCtrl.setRoot(HomePage);
-    //   }
-    //   );
   }
 
 
