@@ -6,7 +6,7 @@ import { IonicPageModule } from 'ionic-angular';
 @NgModule({
   declarations: [LoginPage],
   imports: [IonicPageModule.forChild(LoginPage)],
-  providers: [UserService],
+  providers: [],
   entryComponents: [
     LoginPage
   ]
