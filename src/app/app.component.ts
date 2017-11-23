@@ -13,9 +13,17 @@ import { UserService } from '../services/userService';
 })
 export class MyApp {
 
+<<<<<<< HEAD
   rootPage: any = 'HomePage';
   @ViewChild(Nav) nav: Nav;
   public index: any;
+=======
+  @ViewChild(Nav) nav: Nav;
+  rootPage: any = 'HomePage';
+  public index: any;
+  public isAdmin: boolean;
+  // Setting the root page to HomePage
+>>>>>>> 937f02427585b418c189d07c6ac0aa9334294b7f
 
   // set default stat as LoggedOut
   public loginState: LoginState = LoginState.LoggedOut;
@@ -28,19 +36,34 @@ export class MyApp {
     public platform: Platform,
     public storage: Storage,
     public oneSignal: OneSignal,
+<<<<<<< HEAD
     private _alertCtrl: AlertController,
     private _splashScreen: SplashScreen,
     private _statusBar: StatusBar,
     private _userService: UserService
   ) {    
+=======
+    private alertCtrl: AlertController,
+    splashScreen: SplashScreen,
+    statusBar: StatusBar
+  ) {
+>>>>>>> 937f02427585b418c189d07c6ac0aa9334294b7f
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
 
+<<<<<<< HEAD
       if (this.platform.is('cordova')) {
         _statusBar.styleDefault();
         _statusBar.backgroundColorByHexString('#165cd3');
         _splashScreen.hide();
+=======
+      if ((<any>window).cordova) {
+        //TODO: Figure out why I had to comment the below! 
+        statusBar.styleDefault();
+        statusBar.backgroundColorByHexString('#165cd3');
+        splashScreen.hide();
+>>>>>>> 937f02427585b418c189d07c6ac0aa9334294b7f
 
 
         if (this.oneSignal) {
@@ -57,6 +80,7 @@ export class MyApp {
 
     this.index = 0;
     // Title + Routes for the Menu
+<<<<<<< HEAD
     this.pages = [
       { title: 'Home', component: 'HomePage', access: LoginState.LoggedOut }, // Added Home as the first menu option 
       { title: 'About Us', component: 'RestaurantinfoPage', access: LoginState.LoggedOut }, //Restaurant infomation page
@@ -72,6 +96,43 @@ export class MyApp {
       if (value) {
         console.log('loggedIN');
         this.loginState = LoginState.LoggedIn;
+=======
+
+    this.storage.get('adminRights').then((isAdmin: boolean) => {
+      if (isAdmin) {
+        this.pages = [
+
+          { title: 'Home', component: 'HomePage' },
+          { title: 'Search', component: 'SearchPage' }
+        ];
+
+      } else {
+        this.pages = [
+          { title: 'Home', component: 'HomePage' }, // Added Home as the first menu option 
+          //Restaurant infomation page
+          { title: 'About Us', component: 'RestaurantinfoPage' },
+          { title: 'Cart', component: 'CartPage' },
+          { title: 'Search', component: 'SearchPage' }
+
+        ];
+
+      }
+    })
+
+
+
+    // push admin page if user is an admin
+    this.storage.get('adminRights').then((isAdmin: boolean) => {
+      if (isAdmin) { this.pages.push({ title: 'Admin', component: 'AdminPage' }) }
+      this.isAdmin = isAdmin;
+    })
+
+    // if token is available show login page
+    this.storage.get('token').then((value: string) => {
+      if (value == null || value == "") {
+        this.index = 1;
+        this.pages.push({ title: 'Login', component: 'LoginPage' });
+>>>>>>> 937f02427585b418c189d07c6ac0aa9334294b7f
       }
       else{
         console.log('not logged in');
@@ -93,6 +154,26 @@ export class MyApp {
     } else {
       this.nav.setRoot(page.component); 
     }
+<<<<<<< HEAD
+=======
+
+
+
+    this.storage.get('token').then((value: string) => {
+      if (value != "" && value != null) {
+        this.pages.pop();
+        this.pages.pop();
+        if (this.index == 1) {
+          this.pages.push({ title: 'Search', component: 'SearchPage' })
+          this.index = 0;
+        }
+        this.pages.push({ title: 'Profile', component: 'ProfilePage' })
+        this.pages.push({ title: 'Logout', component: 'LoginPage' })
+      }
+
+      this.nav.setRoot(page.component)
+    });
+>>>>>>> 937f02427585b418c189d07c6ac0aa9334294b7f
   }
 }
 
