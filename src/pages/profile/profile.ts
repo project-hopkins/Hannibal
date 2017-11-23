@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavParams, IonicPage, ModalController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { UserService } from '../../services/userService';
+import { ProfileModalPage } from '../profile-modal/profile-modal';
 import 'rxjs/add/operator/map';
 
 @IonicPage()
@@ -19,8 +20,11 @@ export class ProfilePage {
     this.user = new Object();
   }
 
+  // Will accept parameters of fields to be edited
   public openEditProfileModal(){
-    alert("Works in ion-item");
+    // Im on opening a modal page
+    var editProfileModal = this.modalCtrl.create(ProfileModalPage);
+    editProfileModal.present();
   }
 
 
