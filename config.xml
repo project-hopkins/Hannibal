@@ -25,6 +25,12 @@
         <splash density="port-ldpi" src="resources/android/splash/drawable-port-ldpi-screen.png" />
         <splash density="port-mdpi" src="resources/android/splash/drawable-port-mdpi-screen.png" />
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
+        <icon density="ldpi" src="resources/android/icon/drawable-ldpi/unnamed.png" />
+        <icon density="mdpi" src="resources/android/icon/drawable-mdpi/unnamed.png" />
+        <icon density="hdpi" src="resources/android/icon/drawable-hdpi/unnamed.png" />
+        <icon density="xhdpi" src="resources/android/icon/drawable-xhdpi/unnamed.png" />
+        <icon density="xxhdpi" src="resources/android/icon/drawable-xxhdpi/unnamed.png" />
+        <icon density="xxxhdpi" src="resources/android/icon/drawable-xxxhdpi/unnamed.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -46,6 +52,7 @@
         <param name="ios-package" onload="true" value="CDVStatusBar" />
     </feature>
     <engine name="android" spec="6.3.0" />
+    <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-console" spec="^1.1.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />
