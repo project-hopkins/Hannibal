@@ -1,12 +1,13 @@
+import { UserService } from '../../services/userService';
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { Http, Headers } from '@angular/http';
 import { NavController, NavParams, LoadingController, AlertController, IonicPage } from 'ionic-angular';
 import { HomePage } from '../home/home';
+
 import 'rxjs/Rx';
 /*
   Class for the Login page.
-
 */
 @IonicPage()
 @Component({
@@ -16,8 +17,7 @@ import 'rxjs/Rx';
 export class LoginPage {
 
   public username: string;
-  public password: string;  
-
+  public password: string;
 
   constructor(
     private navCtrl: NavController,
@@ -25,51 +25,39 @@ export class LoginPage {
     private http: Http,
     private storage: Storage,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
-  )
-  {
-
-    this.username='';
-    this.password='';    
+    private alertCtrl: AlertController,
+    private userService: UserService
+  ) {
+    this.username = '';
+    this.password = '';
   }
 
-  // ionViewDidLoad() {
-  //   console.log('ionViewDidLoad LoginPage');
-  // }
 
-  public login():void{
-    let loader = this.loadingCtrl.create({
-      content: "Please wait...",
-      duration: 3000
-    });
+  public login(): void {
+    let loader = this.loadingCtrl.create({ content: "Please wait..." });
     loader.present();
 
-    let headers = new Headers({ 'username': this.username, 'password': this.password });
+    this.userService.login(this.username, this.password).subscribe(
+      data => this.navCtrl.setRoot('HomePage'),
+      (err) => {
+        loader.dismiss().then(data => {
+          if (err.status == 403) {
+            this.alertCtrl.create({
+              title: 'Login Error',
+              message: err.json().error,
+              buttons: ['OK']
+            }).present();
+          }
+        })
 
-    this.http.post("https://keanubackend.herokuapp.com/login", null,{ headers: headers })
-        .subscribe(
-            data => {
-              console.log(data.json()['data']['token']);
-              this.storage.set('token',data.json()['data']['token'])
-              this.storage.set('adminRights',data.json()['data']['adminRights'])
-            },
-            err => {
-              console.log("ERROR!: ", err);
-            },
-            ()=>{
-              console.log('posted login done')
-              loader.dismiss();
-              this.alertCtrl.create({
-                title: 'Login Confirmation',
-                subTitle: 'Login Successful. Redirecting to homepage!',
-                buttons: ['OK']
-              }).present();
-              this.navCtrl.setRoot(HomePage);
-            }
-        );
+      },
+      () => loader.dismiss()
+    );
   }
-  public GoToRegisterPage(){
+
+
+  public GoToRegisterPage() {
+
     this.navCtrl.push('RegisterPage');
   }
-
 }
