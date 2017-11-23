@@ -23,7 +23,7 @@ export class ProfilePage {
   // Will accept parameters of fields to be edited
   public openEditProfileModal(){
     // Im on opening a modal page
-    var editProfileModal = this.modalCtrl.create(ProfileModalPage);
+    let editProfileModal = this.modalCtrl.create(ProfileModalPage);
     editProfileModal.present();
   }
 
