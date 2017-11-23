@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, IonicPage } from 'ionic-angular';
 
 /**
  * Generated class for the ProfileModalPage page.
@@ -8,6 +8,7 @@ import { NavController, NavParams } from 'ionic-angular';
  * on Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
   selector: 'page-profile-modal',
   templateUrl: 'profile-modal.html',

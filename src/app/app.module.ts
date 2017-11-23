@@ -6,15 +6,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-import { ProfileModalPage } from '../pages/profile-modal/profile-modal';
-
 import { UserService } from '../services/userService';
 import { MyApp } from './app.component';
 
 @NgModule({
   declarations: [
-    MyApp,
-    ProfileModalPage
+    MyApp
   ],
   imports: [
     BrowserModule,
@@ -24,8 +21,7 @@ import { MyApp } from './app.component';
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    ProfileModalPage
+    MyApp
   ],
   providers: [{provide: ErrorHandler, 
     useClass: IonicErrorHandler}, 
