@@ -19,7 +19,7 @@
   <ion-list>
     <ion-item-group>
       <ion-item-divider color="light">Personal Information</ion-item-divider>
-      <ion-item>
+      <ion-item (click)="openEditProfileModal()">
         <ion-avatar item-left>
           <img src="assets/images/account.svg">
         </ion-avatar>
@@ -31,7 +31,7 @@
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">Your Card Information</ion-item-divider>
-      <ion-item>
+      <ion-item (click)="openEditProfileModal()">
         <ion-avatar item-left>
           <img src="assets/images/creditcard-flat.png">
         </ion-avatar>
@@ -41,7 +41,7 @@
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">Your Delivery Address</ion-item-divider>
-      <ion-item>
+      <ion-item (click)="openEditProfileModal()">
         <ion-avatar item-left>
           <img src="assets/images/address.png">
         </ion-avatar>
