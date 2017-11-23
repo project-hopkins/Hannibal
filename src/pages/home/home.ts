@@ -5,13 +5,12 @@ import { Http } from '@angular/http';
 import { MenuCallService } from '../../services/getMenu';
 import 'rxjs/add/operator/map';
 import { Storage } from '@ionic/storage';
-import { userService } from '../../services/userService';
+import { UserService } from '../../services/userService';
 
 @IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [MenuCallService, userService]
 })
 export class HomePage {
   public menuItems;
@@ -25,7 +24,7 @@ export class HomePage {
     private menuCall: MenuCallService,
     private storage: Storage,
     private loadingCtrl: LoadingController,
-    private userService: userService) {
+    private userService: UserService) {
 
     let loading: Loading = this.loadingCtrl.create({});
     loading.present();
@@ -39,8 +38,42 @@ export class HomePage {
     }
 
     this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
+    this._getCategoriesCount();
+    
+  }
 
-    // Grabs the number of items in each menu category.
+
+  /**
+   * The following method is already in a service. Althought it doesnt really need it. 
+   * 
+   * Method that activates when a menu item is clicked.
+   * Sends the string of the menu item clicked (ie. starter) to the backend and retrieves the food items from that menu.
+   * Sends this data to the next page.
+   * @param {string} type 
+   * @returns {Promise<any>} 
+   * @memberof HomePage
+   */
+  public async launchSubMenuPage(type: string): Promise<any> {
+    let menuItems=  await this.menuCall.getMenu(type);
+    this.navCtrl.push('SubmenuPage', { data: menuItems });
+  }
+
+  ionViewDidLoad() {
+    this.userService.getUserInfo()
+    console.log('ionViewDidLoad HomePage');
+    this.storage.get('token').then((value: string) => {
+      console.log(value)
+    })
+  }
+
+
+  /**
+   * Grabs the number of items in each menu category.
+   * 
+   * @private
+   * @memberof HomePage
+   */
+  private _getCategoriesCount():void{
     this.menuCategories.forEach(element => {
       this.http.get(`https://keanubackend.herokuapp.com/item/category/${element}/count`).map(res => res.json()).subscribe(
         data => {
@@ -48,35 +81,5 @@ export class HomePage {
           console.log(element + " " + data.data.count);
         });
     });
-  }
-
-  // The following method is already in a service. Althought it doesnt really need it. 
-  /**
-   * Method that activates when a menu item is clicked.
-   * Sends the string of the menu item clicked (ie. starter) to the backend and retrieves the food items from that menu.
-   * Sends this data to the next page.
-   * 
-   * @param {string} type 
-   * @memberof HomePage
-   */
-  public launchSubMenuPage(type: string): void {
-    let loading: Loading = this.loadingCtrl.create({})
-    loading.present();
-
-    this.menuCall.getMenu(type).then((menuItems: Array<any>) => {
-      /* console.log('###### From HOME START ######')
-      console.log(menuItems)
-      console.log('###### From HOME END ######') */
-      this.navCtrl.push('SubmenuPage', { data: menuItems }).then(() => loading.dismiss())
-    })
-
-  }
-
-  ionViewDidLoad() {
-    this.userService.GetUserInfo()
-    console.log('ionViewDidLoad HomePage');
-    this.storage.get('token').then((value: string) => {
-      console.log(value)
-    })
   }
 }
