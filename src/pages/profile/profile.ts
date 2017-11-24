@@ -13,7 +13,10 @@ import 'rxjs/add/operator/map';
 })
 export class ProfilePage {
   public user: Object;
-  constructor(public navParams: NavParams,
+  public informationSent: Object;
+
+  constructor(
+    public navParams: NavParams,
     private storage: Storage,
     private userService: UserService,
     private modalCtrl : ModalController) {
@@ -21,9 +24,10 @@ export class ProfilePage {
   }
 
   // Will accept parameters of fields to be edited
-  public openEditProfileModal(){
-    // Im on opening a modal page
-    let editProfileModal = this.modalCtrl.create('ProfileModalPage');
+  public openEditProfileModal(informationType: String){
+    // Depending on the information. Im showing different things
+    
+    let editProfileModal = this.modalCtrl.create('ProfileModalPage', {informationType});
     editProfileModal.present();
   }
 

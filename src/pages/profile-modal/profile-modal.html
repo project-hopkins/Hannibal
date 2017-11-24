@@ -7,12 +7,103 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>ProfileModalPage</ion-title>
+    <!--<button ion-button clear block color="light" (click)="closeModal()">Cancel</button>
+    <ion-title>Edit Information</ion-title>-->
+
+    <button ion-button icon-only menuToggle (click)="updateInformation()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  
+    <ion-title class="modalTitle">
+      Edit Information
+    </ion-title>
+
+
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <ion-list *ngIf="informationType == 'personal'">
+
+    <h5> Personal Profile</h5>
+    
+    <ion-item>
+      <ion-label stacked>First Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Last Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="informationType == 'payment'">
+    
+    <h2>Edit Credit Card</h2>
+
+    <ion-item>
+      <ion-label stacked>Name On Card</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Credit Card Number</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Type Of Card</ion-label>
+      <ion-select>
+        <ion-option value="VISA">VISA</ion-option>
+        <ion-option value="MASTERCARD">Mastercard</ion-option>
+        <ion-option value="AMEX">Amex</ion-option>
+      </ion-select>    
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="informationType == 'address'">
+    
+    <h2>Edit Address</h2>
+
+    <ion-item>
+      <ion-label floating>Street Number</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Street Name</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Street Type</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Postal Code</ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  
+
+  <h5>Only Enter text in fields you wish to change</h5>  
+
+  <button ion-button block (click)="updateInformation()">Finish</button>
 
 </ion-content>
