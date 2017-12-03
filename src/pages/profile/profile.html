@@ -50,7 +50,7 @@
       </ion-item>
     </ion-item-group>
     <br />
-    <button ion-button block color="secondary" (click)="UpdateInformation()">Update Information</button>
+    <button ion-button block color="secondary" (click)="openEditProfileModal('password')">Change Password</button>
     <ion-item-group>
       <ion-item-divider color="light">Your Last 5 Orders</ion-item-divider>
       <ion-item *ngFor="let order of orders | slice:0:5; let i=index" (click)="ShowOrderDetails(order)">

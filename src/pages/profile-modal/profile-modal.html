@@ -28,7 +28,7 @@
 
   <ion-list *ngIf="informationType == 'personal'">
 
-    <h5> Personal Profile</h5>
+    <h5 class="text-center"> Personal Profile</h5>
     
     <ion-item>
       <ion-label stacked>First Name</ion-label>
@@ -45,16 +45,11 @@
       <ion-input type="text"></ion-input>
     </ion-item>
 
-    <ion-item>
-      <ion-label stacked>Password</ion-label>
-      <ion-input type="password"></ion-input>
-    </ion-item>
-
   </ion-list>
 
   <ion-list *ngIf="informationType == 'payment'">
     
-    <h2>Edit Credit Card</h2>
+    <h2 class="text-center">Edit Credit Card</h2>
 
     <ion-item>
       <ion-label stacked>Name On Card</ion-label>
@@ -79,7 +74,7 @@
 
   <ion-list *ngIf="informationType == 'address'">
     
-    <h2>Edit Address</h2>
+    <h2 class="text-center">Edit Address</h2>
 
     <ion-item>
       <ion-label floating>Street Number</ion-label>
@@ -100,10 +95,30 @@
 
   </ion-list>
 
+  <ion-list *ngIf="informationType == 'password'">
+
+    <h2 class="text-center">Change Password</h2>      
+
+    <ion-item>
+        <ion-label stacked>Current password:</ion-label>
+        <ion-input type="password"></ion-input>
+      </ion-item>
+
+    <ion-item>
+        <ion-label stacked>New password</ion-label>
+        <ion-input type="password"></ion-input>
+    </ion-item>
+            
+    <ion-item>
+      <ion-label stacked>Reenter new password</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
   
+  </ion-list>
 
-  <h5>Only Enter text in fields you wish to change</h5>  
 
-  <button ion-button block (click)="updateInformation()">Finish</button>
+  <p *ngIf="informationType != 'password'" >Only Enter text in fields you wish to change</p>  
+
+  <button ion-button block (click)="updateInformation()">Save Changes</button>
 
 </ion-content>
