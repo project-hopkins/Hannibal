@@ -1,102 +1,28 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
-import { Http, RequestOptions, Headers, } from '@angular/http';
+import { NavParams, IonicPage } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
-/*
-  Generated class for the Profile page.
+import { UserService } from '../../services/userService';
+import 'rxjs/add/operator/map';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+
 @IonicPage()
 @Component({
   selector: 'page-profile',
-  templateUrl: 'profile.html'
+  templateUrl: 'profile.html',
+  providers: [UserService]
 })
 export class ProfilePage {
-  public paymentInformation: Object
-  public addressInformation: Object
-  public personalInformation: Object
-  public fullName: Object
-  public orders : Array<Object>
-
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public http: Http,
-    public request: RequestOptions,
+  public user: Object;
+  constructor(public navParams: NavParams,
     private storage: Storage,
-    private alertCtrl: AlertController) {
-    this.paymentInformation = new Object
-    this.addressInformation = new Object
-    this.personalInformation = new Object
-    this.fullName = new Object
-    this.orders = new Array<Object>()
+    private userService: UserService) {
+    this.user = new Object();
   }
-
-  public GetAddressInfo(): void {
-
-    this.storage.get('token').then(value => {
-      let headers = new Headers();
-      headers.append('token', value)
-
-      let options = new RequestOptions({ headers: headers });
-      this.http.get('https://keanubackend.herokuapp.com/customer/profile', options).map(res => res.json()).subscribe(
-        data => {
-          this.addressInformation = data.data.user.address;
-          this.personalInformation = data.data.user;
-          this.fullName = data.data.user.displayName;
-          //console.log(this.personalInformation);
-        }, err => {
-          console.log(err);
-        },
-      )
-    })
-  }
-
-  public GetPaymentInfo(): void {
-
-    this.storage.get('token').then(value => {
-      let headers = new Headers();
-      headers.append('token', value)
-
-      let options = new RequestOptions({ headers: headers });
-      this.http.get('https://keanubackend.herokuapp.com/customer/payment', options).map(res => res.json()).subscribe(
-        data => {
-          this.paymentInformation = data.data.paymentInfo;
-          //console.log(this.paymentInformation);
-        }, err => {
-          console.log(err);
-        },
-      )
-    })
-  }
-
-  public GetOrderHistory(): void {
-     this.storage.get('token').then(value => {
-      let headers = new Headers();
-      headers.append('token', value)
-
-      let options = new RequestOptions({ headers: headers });
-      this.http.get('https://keanubackend.herokuapp.com/order', options).map(res => res.json()).subscribe(
-        data => {
-          this.orders = data.data.orders;
-          console.log(this.orders);
-        }, err => {
-          console.log(err);
-        },
-      )
-    })
-  }
-
-  public ShowOrderDetails(order: Object):void{
-    console.log(order); 
-  }
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-    this.GetAddressInfo();
-    this.GetPaymentInfo();
-    this.GetOrderHistory();
+    //Gets the Users full details from local storage for use on page
+    this.storage.get('userFullDetails').then((val) => {
+      this.user = val;
+    });
+    this.userService.getOrderHistory();
   }
-
 }

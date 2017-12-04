@@ -7,9 +7,14 @@
 
   <ion-content>
     <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
-      </button>
+      <div *ngFor="let p of pages">
+        <ng-container *ngIf="p.access<=loginState;">
+          <button menuClose ion-item [hidden]="p.component == 'LoginPage' && loginState >= 1" (click)="openPage(p)">
+            {{p.title}}
+          </button>
+        </ng-container>
+
+      </div>
     </ion-list>
   </ion-content>
 
