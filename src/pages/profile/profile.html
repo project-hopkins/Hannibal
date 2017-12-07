@@ -58,13 +58,16 @@
           <img src="assets/images/food.png">
         </ion-avatar>
         <p>{{order.date}}</p>
+        <div *ngFor="let items of order.items; let i=index">
+          <p>{{i+1}} - {{items.name}}</p>
+        </div>
         <div *ngIf="order.delivery == 'True'">
           <p>Delivery</p>
         </div>
         <div *ngIf="order.delivery == 'False'">
           <p>Takeout</p>
         </div>
-        <p>Total Price : ${{orders.total}} </p>
+        <p>Total Price : ${{order.total}} </p>
       </ion-item>
     </ion-item-group>
   </ion-list>

@@ -122,7 +122,7 @@ export class UserService {
             let options = new RequestOptions({ headers: headers });
             this.http.get('https://keanubackend.herokuapp.com/order', options).map(res => res.json()).subscribe(
                 data => {
-                    this.orders = data.data.orders;
+                    this.storage.set('orders', data.data.orders)
                 }, err => {
                     console.log(err);
                 },
