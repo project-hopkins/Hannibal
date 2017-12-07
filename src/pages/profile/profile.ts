@@ -37,22 +37,6 @@ export class ProfilePage {
     editProfileModal.present();
   }
 
-  public ShowOrderDetails(order: Object):void{
-    this.ordersItems = new Array<String>();
-    order['items'].forEach(element => {
-      //console.log(element['itemId']);
-      
-      this.http.get(`https://keanubackend.herokuapp.com/item/id/${element['itemId']}/`).map(res => res.json()).subscribe(
-        data => {
-          //console.log(data.data.item.name);
-          this.ordersItems.push(data.data.item.name);
-        });      
-    });
-
-    console.log(this.ordersItems);
-    console.log(this.orders);
-  }
-
   async ionViewDidLoad() {
     //Gets the Users full details from local storage for use on page
     let count = 0;

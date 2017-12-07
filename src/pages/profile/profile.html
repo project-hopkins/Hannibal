@@ -53,13 +53,13 @@
     <button ion-button block color="secondary" (click)="openEditProfileModal('password')">Change Password</button>
     <ion-item-group>
       <ion-item-divider color="light">Your Last 5 Orders</ion-item-divider>
-      <ion-item *ngFor="let order of orders | slice:0:5; let i=index" (click)="ShowOrderDetails(order)">
+      <ion-item *ngFor="let order of orders | slice:0:5; let i=index">
         <ion-avatar item-left>
           <img src="assets/images/food.png">
         </ion-avatar>
         <p>{{order.date}}</p>
-        <div *ngFor="let items of order.items; let i=index">
-          <p>{{i+1}} - {{items.name}}</p>
+        <div *ngFor="let items of order.items;">
+          <p>{{items.quantity}}x {{items.name}}</p>
         </div>
         <div *ngIf="order.delivery == 'True'">
           <p>Delivery</p>
