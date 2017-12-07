@@ -1,14 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, NavParams, Nav } from 'ionic-angular';
+import { NavController, NavParams, Nav, IonicPage } from 'ionic-angular';
 
-//import { AddItemPage } from '../add-item/add-item';
 
-/*
-  Generated class for the Admin page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-admin',
   templateUrl: 'admin.html'
