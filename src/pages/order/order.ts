@@ -70,11 +70,14 @@ export class OrderPage {
   }
 
   public ConfirmOrder() {
-    // Service GetDate
+    // Service GetDatei
     let dateObj = new Date();
     let month = (dateObj.getUTCMonth() + 1).toString(); //months from 1-12
+    console.log(month.length.toString());
+
+
     // If month/day doesn't have two digits
-    if (month != "10" || "11" || "12" ){
+    if (month.length != 2){
       month = "0" + month;
     }
     let day = (dateObj.getUTCDate()).toString();
@@ -84,7 +87,6 @@ export class OrderPage {
     let year = dateObj.getUTCFullYear();
     let newdate = day + ":" + month + ":" + year
 
-
     this.alertCtrl.create({
       title: 'Order Confirmation',
       subTitle: 'Your order is confirmed and on its way',
@@ -92,7 +94,6 @@ export class OrderPage {
     }).present();
 
     this.storage.get('token').then(value => {
-
       this.cartItems.forEach(element => {
         this.orderItem = { [element.itemId]: element.quantity }
         this.orderItemSent.push(this.orderItem);
