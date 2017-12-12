@@ -27,7 +27,7 @@ export class AddItemPage {
 
     this.name = '';
     this.description = '';
-    this.menuImage = '';
+   // this.menuImage = '';
     this.price = null;
     this.calories = null;
     this.category = '';

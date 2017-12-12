@@ -5,71 +5,60 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
     <button ion-button menuToggle>
-    <ion-icon name="menu"></ion-icon>
+      <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Add Menu Item</ion-title>
   </ion-navbar>
-
 </ion-header>
-
-
 <ion-content padding>
-    <ion-list>
-<div padding>
-    <ion-item>
-      <ion-label floating>Menu Item Name</ion-label>
-      <ion-input type="text" [(ngModel)]="name"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>Description</ion-label>
-      <ion-input type="text" [(ngModel)]="description"></ion-input>
-    </ion-item>
-<ion-item>
-  <!--<button ion-button icon-only clear (click)="useCamera($event)"><ion-icon name="camera"></ion-icon></button>-->
-  <button ion-button icon-only clear (click)="selectImage($event)"><ion-icon name="image"></ion-icon></button>
-</ion-item>
-<ion-item>
-<img item-left [hidden]="menuItem === null" [src]="menuItem"/>
-</ion-item>
-    <!--<ion-item>
-      <ion-label floating>Image URL</ion-label>
-      <button ion-button (click)="useCamera($event)">Take Picture
-        <ion-icon name="md-camera"></ion-icon>
+  <ion-list>
+    <div padding>
+      <ion-item>
+        <ion-label floating>Menu Item Name</ion-label>
+        <ion-input type="text" [(ngModel)]="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-input type="text" [(ngModel)]="description"></ion-input>
+      </ion-item>
+      <ion-item>
+        <p floating>Choose an image for the menu item</p>
+        <button ion-button icon-only clear (click)="useCamera()">
+          <ion-icon name="camera"></ion-icon>
         </button>
-        <button ion-button (click)="selectImage($event)">Select Picture
-        <ion-icon name="md-camera"></ion-icon>
+        <button ion-button icon-only clear (click)="selectImage()">
+          <ion-icon name="image"></ion-icon>
         </button>
-    </ion-item>-->
-
-     <ion-item>
-      <ion-label floating>Price</ion-label>
-      <ion-input type="number" [(ngModel)]="price"></ion-input>
-    </ion-item>
-
-     <ion-item>
-      <ion-label floating>Calories</ion-label>
-      <ion-input type="number" [(ngModel)]="calories"></ion-input>
-    </ion-item>
-
-     <ion-item>
-      <ion-label floating>Category</ion-label>
-      <ion-input type="text" [(ngModel)]="category"></ion-input>
-    </ion-item>
-
-     <ion-item>
-      <ion-label floating>Tags</ion-label>
-      <ion-input type="text" [(ngModel)]="tags"></ion-input>
-    </ion-item>
-</div>
-</ion-list>
-
-
+      </ion-item>
+      <ion-content class="home">
+        <ion-card>
+          <ion-card-content>
+            <img item-left [src]="menuItem" />
+          </ion-card-content>
+        </ion-card>
+      </ion-content>
+      <ion-item>
+        <ion-label floating>Price</ion-label>
+        <ion-input type="number" [(ngModel)]="price"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Calories</ion-label>
+        <ion-input type="number" [(ngModel)]="calories"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Category</ion-label>
+        <ion-input type="text" [(ngModel)]="category"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Tags</ion-label>
+        <ion-input type="text" [(ngModel)]="tags"></ion-input>
+      </ion-item>
+    </div>
+  </ion-list>
   <div padding>
-    <button block ion-button (click)="addItem($event)" >Add Item</button>
+    <button block ion-button (click)="addItem($event)">Add Item</button>
   </div>
 
 </ion-content>
