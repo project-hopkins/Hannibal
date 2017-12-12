@@ -12,7 +12,6 @@ import { Http, RequestOptions, Headers, } from '@angular/http';
 })
 export class ProfileModalPage {
   public user: Object;  
-  public title = 'Hello';
   public informationType: string = this.navParams.get('informationType');
   public personal: any;
   public payment: any;
@@ -29,7 +28,7 @@ export class ProfileModalPage {
     private userService: UserService,
     public http: Http
     ) {
-    
+
     this.personal = {
       firstName: "",
       lastName: ""
@@ -53,7 +52,16 @@ export class ProfileModalPage {
       newPassword: "",
       newPasswordAgain: ""
     }
-    
+
+    this.user = new Object();
+
+    this.storage.get('userFullDetails').then((val) => {
+      this.user = val;
+      console.log("***************");
+      console.log(this.user);
+      console.log("***************");
+    });
+
     console.log(this.informationType);
   } 
 
@@ -61,20 +69,24 @@ export class ProfileModalPage {
   ionViewDidLoad() {      
     this.userService.getUserInfo()
     console.log('ionViewDidLoad HomePage');
+
     this.storage.get('token').then((value: string) => {
       this.token = value;
     })
-    
   }
 
   public updateInformation(){
     
     let check = false;
-    this.storage.get('userFullDetails').then((val) => {
-      this.user = val;
-
       this.storage.get('token').then((value: string) => {
         this.token = value;
+
+        this.headers = new Headers();
+        this.headers.append('token', value)
+
+        let options = new RequestOptions({
+          headers: this.headers
+        })
 
         if(this.password['currentPassword'] != "" ){
           console.log("Password Section");
@@ -84,13 +96,6 @@ export class ProfileModalPage {
           if(this.password['newPassword'] == this.password['newPasswordAgain']
             && this.password['newPassword'] != "" && this.password['newPasswordPassword'] != ""){
 
-            this.headers = new Headers();
-            this.headers.append('token', value)
-  
-            let options = new RequestOptions({
-              headers: this.headers
-            })
-  
             let body = {"newpass": this.password['newPassword'], "oldpass" : this.password['currentPassword']};
   
             this.http.post('https://keanubackend.herokuapp.com/customer/password/edit', body, options).map(res => res.json()).subscribe(
@@ -113,11 +118,26 @@ export class ProfileModalPage {
     
         else {
           console.log("Account section;")
+          //console.log(this.user);
+
+          let body = this.user;
+          
+
+          /*this.http.post('https://keanubackend.herokuapp.com/customer/profile/edit', body, options).map(res => res.json()).subscribe(
+            data => {
+              console.log(data);
+            }, err => {
+              console.log(err);
+            },
+            () => {
+              alert("Information saved");
+              this.closeModal();       
+            }
+          )*/
+        
           console.log(this.user);
-          this.closeModal();          
         }
       })
-    });
   }
 
   public closeModal(){
