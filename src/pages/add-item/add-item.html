@@ -28,11 +28,22 @@
       <ion-label floating>Description</ion-label>
       <ion-input type="text" [(ngModel)]="description"></ion-input>
     </ion-item>
-
-    <ion-item>
+<ion-item>
+  <!--<button ion-button icon-only clear (click)="useCamera($event)"><ion-icon name="camera"></ion-icon></button>-->
+  <button ion-button icon-only clear (click)="selectImage($event)"><ion-icon name="image"></ion-icon></button>
+</ion-item>
+<ion-item>
+<img item-left [hidden]="menuItem === null" [src]="menuItem"/>
+</ion-item>
+    <!--<ion-item>
       <ion-label floating>Image URL</ion-label>
-      <ion-input type="text" [(ngModel)]="menuImage"></ion-input>
-    </ion-item>
+      <button ion-button (click)="useCamera($event)">Take Picture
+        <ion-icon name="md-camera"></ion-icon>
+        </button>
+        <button ion-button (click)="selectImage($event)">Select Picture
+        <ion-icon name="md-camera"></ion-icon>
+        </button>
+    </ion-item>-->
 
      <ion-item>
       <ion-label floating>Price</ion-label>

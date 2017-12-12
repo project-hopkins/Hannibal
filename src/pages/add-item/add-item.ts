@@ -61,7 +61,7 @@ export class AddItemPage {
           console.log('posted registration done')
           this.alertCtrl.create({
             title: 'Item Added',
-            subTitle: 'Congratulations, a menu item has been added!',
+            subTitle: 'Congratulations, a menu item has been added!' + this.menuImage,
             buttons: ['OK']
           }).present();
           this.navCtrl.setRoot('AdminPage');
