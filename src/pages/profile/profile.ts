@@ -27,6 +27,7 @@ export class ProfilePage {
     this.user = new Object();
     this.orders = new Array<Object>();
     this.ordersItems = new Array<String>();
+   
   }
 
   // Will accept parameters of fields to be edited
@@ -41,23 +42,23 @@ export class ProfilePage {
     //Gets the Users full details from local storage for use on page
     let count = 0;
 
-    this.storage.get('userFullDetails').then((val) => {
-      this.user = val;
-    });
+    this.user = await this.storage.get('userFullDetails');
 
-    this.orders = await this.storage.get('orders');
+    // this.storage.get('userFullDetails').then((val) => {
+    //   this.user = val;
+    // });
+
+    
+    this.orders = await this.userService.getOrderHistory();
 
     this.orders.forEach((element, index) => {
       this.orders[index]['date'] = this.orders[index]['date'].toString().substring(0, 17);
       element['items'].forEach(async (itemObject, jindex) => {
         let itemid = itemObject['itemId']
+        console.log(itemObject);
         let itemData = await this.http.get(`https://keanubackend.herokuapp.com/item/id/${itemid}/`).map(res => res.json()).toPromise();
         this.orders[index]['items'][jindex]['name'] = itemData.data.item.name;
       });
-    });
-
-    console.log(this.orders);
-  
-    this.userService.getOrderHistory();
+    });  
   }
 }

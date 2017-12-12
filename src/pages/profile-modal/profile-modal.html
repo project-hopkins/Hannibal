@@ -9,8 +9,8 @@
   <ion-navbar>
     <!--<button ion-button clear block color="light" (click)="closeModal()">Cancel</button>
     <ion-title>Edit Information</ion-title>-->
-
-    <button ion-button icon-only menuToggle (click)="updateInformation()">
+    
+    <button ion-button icon-only menuToggle (click)="closeModal()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
   
@@ -30,17 +30,17 @@
     
     <ion-item>
       <ion-label stacked>First Name</ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
+      <ion-input type="text" placeholder="{{personal.firstName}}" [(ngModel)]="personal.firstName"></ion-input>
+    </ion-item>click
 
     <ion-item>
       <ion-label stacked>Last Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="personal.lastName"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Email</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="personal.email"></ion-input>
     </ion-item>
 
   </ion-list>
@@ -51,17 +51,17 @@
 
     <ion-item>
       <ion-label stacked>Name On Card</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="payment.fullName"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Credit Card Number</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="payment.number"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Type Of Card</ion-label>
-      <ion-select>
+      <ion-select [(ngModel)]="payment.cartType">
         <ion-option value="VISA">VISA</ion-option>
         <ion-option value="MASTERCARD">Mastercard</ion-option>
         <ion-option value="AMEX">Amex</ion-option>
@@ -73,22 +73,22 @@
   <ion-list *ngIf="informationType == 'address'">
     
     <h2 class="text-center">Edit Address</h2>
-
+    click
     <ion-item>
       <ion-label floating>Street Number</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="address.streetNumber" ></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Street Name</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="address.streetName"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Street Type</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="address.streetType"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label floating>Postal Code</ion-label>
-      <ion-input type="text"></ion-input>
+      <ion-input type="text" [(ngModel)]="address.postalCode"></ion-input>
     </ion-item>
 
   </ion-list>
@@ -99,21 +99,20 @@
 
     <ion-item>
         <ion-label stacked>Current password:</ion-label>
-        <ion-input name="checkOldPassword" type="password"></ion-input>
+        <ion-input required type="password" [(ngModel)]="password.currentPassword"></ion-input>
       </ion-item>
 
     <ion-item>
         <ion-label stacked>New password</ion-label>
-        <ion-input type="newPassword1"></ion-input>
+        <ion-input required type="password" [(ngModel)]="password.newPassword"></ion-input>
     </ion-item>
             
     <ion-item>
       <ion-label stacked>Reenter new password</ion-label>
-      <ion-input type="newPassword2"></ion-input>
+      <ion-input required type="password" [(ngModel)]="password.newPasswordAgain"></ion-input>
     </ion-item>
   
   </ion-list>
-
 
   <p *ngIf="informationType != 'password'" >Only Enter text in fields you wish to change</p>  
 

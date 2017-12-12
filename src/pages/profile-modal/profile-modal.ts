@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, IonicPage, ViewController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { UserService } from '../../services/userService';
-
+import { Http, RequestOptions, Headers, } from '@angular/http';
 
 @IonicPage()
 @Component({
@@ -14,48 +14,110 @@ export class ProfileModalPage {
   public user: Object;  
   public title = 'Hello';
   public informationType: string = this.navParams.get('informationType');
+  public personal: any;
+  public payment: any;
+  public address: any;
+  public password: any;
+  public token: any; 
+  public headers : Headers;
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     private storage: Storage,    
     public viewCtrl: ViewController,
-    private userService: UserService) {
-    console.log(this.informationType);
-    // Get the user info and have it as a placeholder in the text fields
-  }
-
-
-  ionViewDidLoad() {  
-    //customer/profile/edit
+    private userService: UserService,
+    public http: Http
+    ) {
     
+    this.personal = {
+      firstName: "",
+      lastName: ""
+    }
+
+    this.payment = {
+      fullName: "",
+      number: "",
+      cardType: ""
+    }
+
+    this.address = {
+      streetNumber: "",
+      streetName: "",
+      streetType: "",
+      postalCode: ""
+    }
+
+    this.password = {
+      currentPassword: "",
+      newPassword: "",
+      newPasswordAgain: ""
+    }
+    
+    console.log(this.informationType);
+  } 
+
+
+  ionViewDidLoad() {      
     this.userService.getUserInfo()
     console.log('ionViewDidLoad HomePage');
     this.storage.get('token').then((value: string) => {
-      console.log("STARTED");
-      console.log(value)
+      this.token = value;
     })
     
   }
 
   public updateInformation(){
-    // Code to edit information.
-
+    
+    let check = false;
     this.storage.get('userFullDetails').then((val) => {
       this.user = val;
-      console.log(this.user);
-      // Have to do it in here
-      // Example of how to get invidual values from it
-      console.log(this.user['address'].name);
+
+      this.storage.get('token').then((value: string) => {
+        this.token = value;
+
+        if(this.password['currentPassword'] != "" ){
+          console.log("Password Section");
+          console.log(this.token);
+          
+          // If newpass = new pass again
+          if(this.password['newPassword'] == this.password['newPasswordAgain']
+            && this.password['newPassword'] != "" && this.password['newPasswordPassword'] != ""){
+
+            this.headers = new Headers();
+            this.headers.append('token', value)
+  
+            let options = new RequestOptions({
+              headers: this.headers
+            })
+  
+            let body = {"newpass": this.password['newPassword'], "oldpass" : this.password['currentPassword']};
+  
+            this.http.post('https://keanubackend.herokuapp.com/customer/password/edit', body, options).map(res => res.json()).subscribe(
+              data => {
+                console.log(data);
+              }, err => {
+                console.log(err);
+                alert("Incorrect current password");
+              },
+              () => {
+                alert("Password changed");
+                this.closeModal();       
+              }
+            )
+          }
+          else{
+            alert("Passwords do not match");
+          }
+        }
+    
+        else {
+          console.log("Account section;")
+          console.log(this.user);
+          this.closeModal();          
+        }
+      })
     });
-
-
-
-    // Check Swagger to see call post call details
-    // Token in header
-    // Main in body
-
-    this.closeModal();
   }
 
   public closeModal(){

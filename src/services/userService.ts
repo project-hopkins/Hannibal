@@ -115,18 +115,23 @@ export class UserService {
      * 
      * @memberof userService
      */
-    public getOrderHistory(): void {
-        this.storage.get('token').then(value => {
-            let headers = new Headers();
-            headers.append('token', value)
-            let options = new RequestOptions({ headers: headers });
-            this.http.get('https://keanubackend.herokuapp.com/order', options).map(res => res.json()).subscribe(
-                data => {
-                    this.storage.set('orders', data.data.orders)
-                }, err => {
-                    console.log(err);
-                },
-            )
-        })
+    public async getOrderHistory(): Promise<any> {
+        let token = await this.storage.get('token');
+        let headers = new Headers();
+        headers.append('token', token);
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get('https://keanubackend.herokuapp.com/order', options).map(res => res.json().data.orders).toPromise();
+        // this.storage.get('token').then(value => {
+        //     let headers = new Headers();
+        //     headers.append('token', value)
+        //     let options = new RequestOptions({ headers: headers });
+        //     this.http.get('https://keanubackend.herokuapp.com/order', options).map(res => res.json()).subscribe(
+        //         data => {
+        //             this.storage.set('orders', data.data.orders)
+        //         }, err => {
+        //             console.log(err);
+        //         },
+        //     )
+        // })
     }
 }

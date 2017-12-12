@@ -61,4 +61,5 @@
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="onesignal-cordova-plugin" spec="^2.2.2" />
     <allow-navigation href="http://192.168.0.18:8100" />
+    <allow-navigation href="http://10.24.64.249:8100" />
 </widget>
