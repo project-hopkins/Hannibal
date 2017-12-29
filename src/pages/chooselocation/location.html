@@ -1,0 +1,23 @@
+
+<ion-header>
+  
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Maps</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+    
+  <ion-content padding>
+    <div class="map" #map id="map"  style="height: 40vh; position: relative; margin: auto;width: 92%;overflow: hidden;"></div> 
+    <ion-item style="width: 92%;position: relative;">
+      <ion-label>Gender</ion-label>
+      <ion-select [(ngModel)]="gender">
+        <ion-option value="f">Female</ion-option>
+        <ion-option value="m">Male</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-content>

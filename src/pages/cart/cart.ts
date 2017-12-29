@@ -36,7 +36,7 @@ export class CartPage {
    * @memberof CartPage
    */
   public GoOrderPage() {
-    this.navCtrl.push('OrderPage');
+    this.navCtrl.push('ChooseLocation');
   }
 
   /**
