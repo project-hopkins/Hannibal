@@ -27,6 +27,8 @@ export class CartPage {
     this.cartItemsIncrease = new Map<String, number>();
     this.cartItems = new Array<Object>();
     this.delivery = false;
+
+
   }
 
   /**
@@ -118,6 +120,10 @@ export class CartPage {
     });
 
     confirm.present();
+
+  }
+
+  public getRecommended(){
 
   }
 
