@@ -125,6 +125,11 @@ export class CartPage {
     
   }
 
+  public addToCart(itemId: String){
+    this.cartService.addToCart({ 'id': itemId, 'quantity': 1 });
+    location.reload();
+  }
+
   ionViewDidLoad() {
 
     console.log('in cart loading');

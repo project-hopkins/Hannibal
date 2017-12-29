@@ -47,7 +47,7 @@
     </ion-thumbnail>
     <h3 class="recommendationsText">{{cartItem.item.name}}</h3>
     <h3>${{cartItem.item.price}}</h3>
-    <button class="recommendationsButton" ion-button icon-left (click)="addItem(cartItem.item._id)">
+    <button class="recommendationsButton" ion-button icon-left (click)="addToCart(cartItem.item._id)">
       <ion-icon name="cart"></ion-icon>
       Add To Cart       
     </button>
