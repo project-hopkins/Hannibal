@@ -27,8 +27,7 @@ export class CartPage {
     this.cartItemsIncrease = new Map<String, number>();
     this.cartItems = new Array<Object>();
     this.delivery = false;
-
-
+    this.getRecommended();
   }
 
   /**
@@ -104,7 +103,6 @@ export class CartPage {
         }
       });
     }
-
     let confirm: Alert = this.alertController.create({
       title: 'Remove item',
       message: 'Remove ' + cartItem['item']['name'] + ' from cart?',
@@ -124,7 +122,7 @@ export class CartPage {
   }
 
   public getRecommended(){
-
+    
   }
 
   ionViewDidLoad() {

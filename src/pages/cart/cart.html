@@ -35,6 +35,24 @@
     </ion-item>
   </ion-list>
 
+  
+  <ion-item-divider>
+    <h2>Grab these quick before they dissapear!</h2>
+  </ion-item-divider>
+  <br/>
+
+  <ion-item *ngFor="let cartItem of cartItems">
+    <ion-thumbnail item-end>
+      <img class="recommendationImage" src="{{cartItem.item.imageURL}}">
+    </ion-thumbnail>
+    <h3 class="recommendationsText">{{cartItem.item.name}}</h3>
+    <h3>${{cartItem.item.price}}</h3>
+    <button class="recommendationsButton" ion-button icon-left (click)="addItem(cartItem.item._id)">
+      <ion-icon name="cart"></ion-icon>
+      Add To Cart       
+    </button>
+  </ion-item>
+
   <div *ngIf="cartItems.length ===0">
     <h1 text-center>No items in cart</h1>
   </div>
