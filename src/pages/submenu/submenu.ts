@@ -1,20 +1,23 @@
 import { Component } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController, NavParams, LoadingController, Loading, AlertController, IonicPage } from 'ionic-angular';
-import { CartService } from '../../services/cartService';
 import { Http, Headers, RequestOptions } from '@angular/http';
+
+import { CartService } from '../../services/cartService';
+import { ItemService } from '../../services/getItem';
 
 
 @IonicPage()
 @Component({
   selector: 'page-submenu',
   templateUrl: 'submenu.html',
-  providers: [CartService]
+  providers: [CartService, ItemService]
 })
 export class SubmenuPage {
   public menuItems: Array<Object>;
   public cartItem: Object;
   public isAdmin: boolean;
+  public ratingsItem: any;
 
   constructor(
     public navCtrl: NavController,
@@ -23,13 +26,18 @@ export class SubmenuPage {
     private cartService: CartService,
     private http: Http,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private itemService: ItemService
   ) {
 
     this.menuItems = this.navParams.get('data');
     this.storage.get('adminRights').then(value => {
       this.isAdmin = value
     })
+    this.ratingsItem = this.navParams.get('data.itemid')
+    this.ratingsItem.array.forEach(itemid => {
+      
+    });
   }
 
   // Edit Items Event
@@ -95,6 +103,10 @@ export class SubmenuPage {
       subTitle: 'This item has been added to the cart',
       buttons: ['Okay']
     }).present();
+  }
+
+  public itemRating(item: string) {
+    this.itemService.getItemRating(item);
   }
 
 }
