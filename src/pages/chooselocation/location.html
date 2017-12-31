@@ -13,11 +13,24 @@
     
   <ion-content padding>
     <div class="map" #map id="map"  style="height: 40vh; position: relative; margin: auto;width: 92%;overflow: hidden;"></div> 
-    <ion-item style="width: 92%;position: relative;">
-      <ion-label>Gender</ion-label>
-      <ion-select [(ngModel)]="gender">
-        <ion-option value="f">Female</ion-option>
-        <ion-option value="m">Male</ion-option>
-      </ion-select>
-    </ion-item>
+    <!--<ion-list>
+        <ion-item *ngFor="let grocery of groceries">{{grocery}}</ion-item>
+    </ion-list>-->
+    <div *ngIf="restaurantItems.length ===0">
+      <h1 text-center>No restaurant available. Please allow access to location.</h1>
+    </div>
+    <div *ngIf="restaurantItems.length >0">
+      <br/>
+        <h2 text-center>Please select a location</h2>
+        <ion-list radio-group>
+            <ion-item *ngFor="let restaurant of restaurantItems">
+                <ion-radio value="{{restaurant.title}}"></ion-radio>
+                <ion-label>  {{restaurant.title}}</ion-label>
+                <ion-label>{{restaurant.fullAddress}}</ion-label>
+                
+            </ion-item>
+        </ion-list>
+        <button ion-button block large (click)="GoToOrderPage()">Next</button>
+    </div>
+
   </ion-content>

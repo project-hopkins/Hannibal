@@ -10,6 +10,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { UserService } from '../services/userService';
 import { MyApp } from './app.component';
+import { LocationService } from '../services/chooseLocationService';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { MyApp } from './app.component';
     UserService,
     StatusBar,
     SplashScreen,
-    Geolocation
+    Geolocation,LocationService
   ]
 })
 export class AppModule {}
