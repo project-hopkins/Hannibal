@@ -33,19 +33,13 @@ export class LocationService {
 				this.http.post(link, dataa, options) .map(res => res.json())
 			  .subscribe(
 					data => {
-						console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>");
-						console.log(data);
-						console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>");
-						
+									
 						var obj =data.data.restaurants;
 						for(var i=0; i<obj.length;i++)
 						{
-							console.log(obj[i].address.streetName+"   #########");
 							var longg = obj[i].location.latitude;
-							var latt = obj[i].location.longitude;
-							//var markers = new google.maps.LatLng(latt,longg);
-							console.log(i+" from web service >>> "+latt+","+longg);
-						//	this.addMarker(latt,longg,obj[i].address.streetName);
+							var latt = obj[i].location.longitude;					
+							
 							restaurants.push({
 								title: obj[i].address.streetNumber+" "+obj[i].address.streetName,
 								fullAddress: obj[i].address.city+", "+obj[i].address.province+" "+obj[i].address.postalCode,
