@@ -41,13 +41,13 @@
   </ion-item-divider>
   <br/>
 
-  <ion-item *ngFor="let cartItem of cartItems">
+  <ion-item *ngFor="let recommendedItem of recommendedItems">
     <ion-thumbnail item-end>
-      <img class="recommendationImage" src="{{cartItem.item.imageURL}}">
+      <img class="recommendationImage" src="{{recommendedItem.imageURL}}">
     </ion-thumbnail>
-    <h3 class="recommendationsText">{{cartItem.item.name}}</h3>
-    <h3>${{cartItem.item.price}}</h3>
-    <button class="recommendationsButton" ion-button icon-left (click)="addToCart(cartItem.item._id)">
+    <h3 class="recommendationsText"><b>{{recommendedItem.name}}</b></h3>
+    <h3>${{recommendedItem.price}}</h3>
+    <button class="recommendationsButton" ion-button icon-left (click)="addToCart(recommendedItem._id)">
       <ion-icon name="cart"></ion-icon>
       Add To Cart       
     </button>

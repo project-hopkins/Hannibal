@@ -29,7 +29,6 @@ export class EdititemPage {
     this.item = this.navParams.get('data')
 
     console.log(this.item);
-
   }
 
   ionViewDidLoad() {}
@@ -60,10 +59,7 @@ export class EdititemPage {
         },
         () => {
           loader.dismiss();
-
         });
-
-
 
     });
   }

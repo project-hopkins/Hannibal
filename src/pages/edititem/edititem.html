@@ -46,6 +46,11 @@
       <ion-input type="text" [(ngModel)]="item.price"></ion-input>
     </ion-item>
 
+    <ion-item>
+        <ion-label>Recommended</ion-label>
+        <ion-toggle></ion-toggle>    
+    </ion-item>
+
   </ion-list>
   <button ion-button color="secondary" full (click)="editItemClick()">Accept Changes</button>
 
