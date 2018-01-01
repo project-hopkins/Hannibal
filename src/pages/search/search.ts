@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { LoadingController, AlertController, IonicPage } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 import { CartService } from "../../services/cartService";
 
 @IonicPage()
@@ -11,7 +11,10 @@ import { CartService } from "../../services/cartService";
   providers: [CartService]
 })
 export class SearchPage {
-
+  public user: Object;
+  public testUser: any;
+  public userAdmin: boolean;
+  public userNotAdmin: boolean;
   private _searchUrl: string;
   public results: Array<Object>;
 
@@ -23,7 +26,7 @@ export class SearchPage {
    * @param alertController 
    */
   constructor(
-    private http: Http,
+    private http: Http,private storage: Storage,
     private cartService: CartService,
     private loadingCtrl: LoadingController,
     private alertController: AlertController
@@ -38,6 +41,7 @@ export class SearchPage {
    */
   public ionViewDidLoad(): void {
     console.log('ionViewDidLoad SearchPage');
+    this.checkAdminRights();
   }
 
 
@@ -76,6 +80,18 @@ export class SearchPage {
     this.cartService.addToCart(item);
     loading.dismiss();
     this.alertController.create({title: item['name'], message: 'Added to cart', buttons: ['OK']}).present();
+  }
+  public checkAdminRights() {
+    this.storage.get('adminRights').then((val) => {
+      this.testUser = val;
+      if (this.testUser == true) {
+         this.userAdmin = true;
+         this.userNotAdmin = false;
+      } else {
+        this.userAdmin = false;
+        this.userNotAdmin = true;
+      }
+    });
   }
 
 }

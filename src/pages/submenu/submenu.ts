@@ -12,6 +12,10 @@ import { Http, Headers, RequestOptions } from '@angular/http';
   providers: [CartService]
 })
 export class SubmenuPage {
+  public user: Object;
+  public testUser: any;
+  public userAdmin: boolean;
+  public userNotAdmin: boolean;
   public menuItems: Array<Object>;
   public cartItem: Object;
   public isAdmin: boolean;
@@ -19,11 +23,12 @@ export class SubmenuPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private storage: Storage,
+   
     private cartService: CartService,
     private http: Http,
     private alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private storage: Storage
   ) {
 
     this.menuItems = this.navParams.get('data');
@@ -76,7 +81,9 @@ export class SubmenuPage {
   }
 
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+    this.checkAdminRights();
+   }
 
   /**
    * Add item to cart
@@ -96,5 +103,16 @@ export class SubmenuPage {
       buttons: ['Okay']
     }).present();
   }
-
+  public checkAdminRights() {
+    this.storage.get('adminRights').then((val) => {
+      this.testUser = val;
+      if (this.testUser == true) {
+         this.userAdmin = true;
+         this.userNotAdmin = false;
+      } else {
+        this.userAdmin = false;
+        this.userNotAdmin = true;
+      }
+    });
+  }
 }

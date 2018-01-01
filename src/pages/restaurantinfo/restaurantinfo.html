@@ -6,15 +6,21 @@
 -->
 <ion-header>
 
-  <ion-navbar class="adv-map">
+  <ion-navbar *ngIf="userAdmin" color="danger" class="adv-map">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Restaurant Information</ion-title>
   </ion-navbar>
-
 </ion-header>
-
+<ion-header>
+  <ion-navbar *ngIf="userNotAdmin"  color="danger" class="adv-map">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Restaurant Information</ion-title>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding class="cards-bg">
 

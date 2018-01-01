@@ -1,12 +1,18 @@
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar *ngIf="userAdmin" color="danger">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Search</ion-title>
   </ion-navbar>
-
+</ion-header>
+<ion-header>
+    <ion-navbar *ngIf="userNotAdmin">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Search</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
