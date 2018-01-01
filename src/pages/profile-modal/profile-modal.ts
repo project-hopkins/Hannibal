@@ -3,6 +3,7 @@ import { NavController, NavParams, IonicPage, ViewController } from 'ionic-angul
 import { Storage } from '@ionic/storage';
 import { UserService } from '../../services/userService';
 import { Http, RequestOptions, Headers, } from '@angular/http';
+import { ProfilePage } from '../profile/profile';
 
 @IonicPage()
 @Component({
@@ -130,8 +131,6 @@ export class ProfileModalPage {
           }
 
           var obj = {"adminRights": false };
-          this.user['paymentInfo']['num'] = 451535486;
-          this.user['paymentInfo']['expiry'] =  "1/1/17 12:00:00 AM UTC"
           this.user = Object.assign(this.user, obj);
 
           this.http.post('https://keanubackend.herokuapp.com/customer/profile/edit', body, options).map(res => res.json()).subscribe(
@@ -146,11 +145,8 @@ export class ProfileModalPage {
             }
           )
 
-          // %w/%m/%y %I:%M:%S %p UTC
-          // 1/1/17 12:00:00 AM UTC
-          // Sun, 01 Jan 2017 00:00:00 GMT
-
           console.log(this.user);
+          this.navCtrl.getPrevious();
         }
       })
   }
