@@ -5,13 +5,20 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-  <ion-navbar>
+  <ion-navbar *ngIf="userAdmin" color="danger">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-
     <ion-title>Cart</ion-title>
   </ion-navbar>
+</ion-header>
+<ion-header>
+    <ion-navbar *ngIf="userNotAdmin">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Cart</ion-title>
+    </ion-navbar>
 </ion-header>
 <ion-content>
   <ion-list>

@@ -5,14 +5,20 @@
 -->
 <!-- Keanu Admin Page -->
 <ion-header>
-
-  <ion-navbar>
-    <button ion-button menuToggle> 
-    <ion-icon name="menu"></ion-icon> 
+  <ion-navbar *ngIf="userAdmin" color="danger">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title>Admin</ion-title>
   </ion-navbar>
-
+</ion-header>
+<ion-header>
+    <ion-navbar *ngIf="userNotAdmin">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Admin</ion-title>
+    </ion-navbar>
 </ion-header>
 
 

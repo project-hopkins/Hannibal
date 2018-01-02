@@ -1,12 +1,18 @@
-<!-- HomePage for Keanu's -->
-
 <ion-header>
-  <ion-navbar>
+  <ion-navbar *ngIf="userAdmin" color="danger">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title >Home</ion-title>
+    <ion-title>Menu</ion-title>
   </ion-navbar>
+</ion-header>
+<ion-header>
+    <ion-navbar *ngIf="userNotAdmin">
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Menu</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <!-- Main Container with a blue background -->
