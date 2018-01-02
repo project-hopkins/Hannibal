@@ -32,6 +32,7 @@ export class CartPage {
     this.cartItemsIncrease = new Map<String, number>();
     this.cartItems = new Array<Object>();
     this.delivery = false;
+    
   }
 
   /**
@@ -40,8 +41,8 @@ export class CartPage {
    * 
    * @memberof CartPage
    */
-  public GoOrderPage() {
-    this.navCtrl.push('OrderPage');
+  public GoToLocationPage() {
+    this.navCtrl.push('ChooseLocation');
   }
 
   /**
