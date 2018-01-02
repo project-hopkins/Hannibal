@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Nav, IonicPage } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -8,11 +8,15 @@ import { NavController, NavParams, Nav, IonicPage } from 'ionic-angular';
   templateUrl: 'admin.html'
 })
 export class AdminPage {
+  public user: Object;
+  public testUser: any;
+  public userAdmin: boolean;
+  public userNotAdmin: boolean;
   @ViewChild(Nav) nav: Nav;
   item: Array<{ title: string, component: any }>;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 
     this.item =
       [
@@ -21,6 +25,7 @@ export class AdminPage {
   }
   ionViewDidLoad() {
     console.log('ionViewDidLoad AdminPage');
+    this.checkAdminRights();
   }
 
 
@@ -36,5 +41,16 @@ export class AdminPage {
     console.log(page.component);
     this.navCtrl.push(page.component);
   }
-
+  public checkAdminRights() {
+    this.storage.get('adminRights').then((val) => {
+      this.testUser = val;
+      if (this.testUser == true) {
+         this.userAdmin = true;
+         this.userNotAdmin = false;
+      } else {
+        this.userAdmin = false;
+        this.userNotAdmin = true;
+      }
+    });
+  }
 }

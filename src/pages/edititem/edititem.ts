@@ -16,7 +16,10 @@ import { LoadingController, Loading } from 'ionic-angular';
   templateUrl: 'edititem.html'
 })
 export class EdititemPage {
-
+  public user: Object;
+  public testUser: any;
+  public userAdmin: boolean;
+  public userNotAdmin: boolean;
 
   public item: Object;
 
@@ -32,7 +35,7 @@ export class EdititemPage {
 
   }
 
-  ionViewDidLoad() {}
+  ionViewDidLoad() { this.checkAdminRights();}
 
   //Accept Change Button Event Handler
 
@@ -65,6 +68,18 @@ export class EdititemPage {
 
 
 
+    });
+  }
+  public checkAdminRights() {
+    this.storage.get('adminRights').then((val) => {
+      this.testUser = val;
+      if (this.testUser == true) {
+         this.userAdmin = true;
+         this.userNotAdmin = false;
+      } else {
+        this.userAdmin = false;
+        this.userNotAdmin = true;
+      }
     });
   }
 

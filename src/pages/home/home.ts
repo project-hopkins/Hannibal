@@ -13,6 +13,10 @@ import { UserService } from '../../services/userService';
   templateUrl: 'home.html',
 })
 export class HomePage {
+  public user: Object;
+  public testUser: any;
+  public userAdmin: boolean;
+  public userNotAdmin: boolean;
   public menuItems;
   public itemsInSubmenu: Object;
   private menuCategories: Array<string> = ["Starter", "Salads", "Entrees", "Dessert"];
@@ -64,6 +68,8 @@ export class HomePage {
     this.storage.get('token').then((value: string) => {
       console.log(value)
     })
+
+    this.checkAdminRights();
   }
 
 
@@ -80,6 +86,18 @@ export class HomePage {
           this.itemsInSubmenu[element] = data.data.count;
           console.log(element + " " + data.data.count);
         });
+    });
+  }
+  public checkAdminRights() {
+    this.storage.get('adminRights').then((val) => {
+      this.testUser = val;
+      if (this.testUser == true) {
+         this.userAdmin = true;
+         this.userNotAdmin = false;
+      } else {
+        this.userAdmin = false;
+        this.userNotAdmin = true;
+      }
     });
   }
 }
