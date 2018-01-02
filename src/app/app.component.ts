@@ -13,6 +13,10 @@ import { UserService } from '../services/userService';
 })
 export class MyApp {
 
+  public user: Object;
+  public testUser: any;
+  public userAdmin: boolean;
+  public userNotAdmin: boolean;
   rootPage: any = 'HomePage';
   @ViewChild(Nav) nav: Nav;
   public index: any;
@@ -77,6 +81,7 @@ export class MyApp {
         console.log('not logged in');
         this.loginState = LoginState.LoggedOut;
       }
+      this.checkAdminRights();
     });
 
     this._userService.isAdmin.subscribe((value: boolean) =>{
@@ -93,6 +98,18 @@ export class MyApp {
     } else {
       this.nav.setRoot(page.component); 
     }
+  }
+  public checkAdminRights() {
+    this.storage.get('adminRights').then((val) => {
+      this.testUser = val;
+      if (this.testUser == true) {
+         this.userAdmin = true;
+         this.userNotAdmin = false;
+      } else {
+        this.userAdmin = false;
+        this.userNotAdmin = true;
+      }
+    });
   }
 }
 
