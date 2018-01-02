@@ -14,10 +14,12 @@ import { ItemService } from '../../services/getItem';
   providers: [CartService, ItemService]
 })
 export class SubmenuPage {
-  public menuItems: Array<Object>;
+  public menuItems: Array<any>;
   public cartItem: Object;
   public isAdmin: boolean;
-  public ratingsItem: any;
+  public ratingsItem: Array<Object>;
+  public ratingsArr: any[] = [];
+  public rate: string;
 
   constructor(
     public navCtrl: NavController,
@@ -29,15 +31,24 @@ export class SubmenuPage {
     private loadingCtrl: LoadingController,
     private itemService: ItemService
   ) {
+    this.ratingsItem = new Array<Object>();
+    this.rate = '5';
 
     this.menuItems = this.navParams.get('data');
+    console.log(this.menuItems);
     this.storage.get('adminRights').then(value => {
       this.isAdmin = value
     })
-    this.ratingsItem = this.navParams.get('data.itemid')
-    this.ratingsItem.array.forEach(itemid => {
-      
-    });
+    //  this.getItemRating('58be0265f188127b8fd2af55');
+    for (let i of this.menuItems) {
+      //console.log(i._id);
+      this.getItemRating(i._id);
+      //this.ratingsItem = this.itemRating(i._id);
+      console.log(this.ratingsItem);
+
+      // this.ratingsArr.push(i._id);    
+    }
+
   }
 
   // Edit Items Event
@@ -105,8 +116,26 @@ export class SubmenuPage {
     }).present();
   }
 
-  public itemRating(item: string) {
-    this.itemService.getItemRating(item);
-  }
+  /* public itemRating(item: string) {
+    let ratings = this.itemService.getItemRating(item)
+    console.log('FSDFASFASFS ' + ratings);
+   }*/
+  public getItemRating(item: string) {
+    this.storage.get('token').then(value => {
 
+      let headers = new Headers();
+      headers.append('token', value)
+
+      let options = new RequestOptions({ headers: headers });
+
+      this.http.get('https://keanubackend.herokuapp.com/rate/item/' + item, options).map(res => res.json()).subscribe(
+        data => {
+          this.ratingsItem = data;
+          // console.log(data);
+          console.log(this.ratingsItem);
+          this.ratingsArr.push(this.ratingsItem)
+          console.log(this.ratingsArr);
+        });
+    });
+  }
 }

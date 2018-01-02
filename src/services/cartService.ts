@@ -96,7 +96,6 @@ export class CartService {
 						.subscribe(
 						data => {
 							index++;
-
 							cartItemsData.push({
 								'item': data.data.item,
 								'quantity': quantity

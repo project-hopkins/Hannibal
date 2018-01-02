@@ -13,16 +13,21 @@ import 'rxjs/add/operator/map';
 })
 export class ProfilePage {
   public user: Object;
+  public testUser: any;
+  public userAdmin: boolean;
+  public userNotAdmin: boolean;
   constructor(public navParams: NavParams,
     private storage: Storage,
     private userService: UserService) {
     this.user = new Object();
+
   }
   ionViewDidLoad() {
     //Gets the Users full details from local storage for use on page
     this.storage.get('userFullDetails').then((val) => {
       this.user = val;
+      console.log(this.user);
     });
     this.userService.getOrderHistory();
-  }
+    }
 }

@@ -10,6 +10,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { UserService } from '../services/userService';
 import { MyApp } from './app.component';
 
+
 @NgModule({
   declarations: [
     MyApp

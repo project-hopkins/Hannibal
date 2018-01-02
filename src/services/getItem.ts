@@ -8,13 +8,13 @@ export class ItemService {
     public orderItem: { name: String, price: any, imageURL: String, quantity: Number }
     public orderItems: Array<{ name: String, price: any, imageURL: String, quantity: Number }>
     public itemRating: string;
-    public rating: string;
+    public rating: any;
     public item: string;
+    public options: any;
 
     constructor(private http: Http, public storage: Storage) {
         this.orderItem = { name: "", price: 0, imageURL: "", quantity: 0 }
         this.orderItems = new Array<any>()
-        this.rating = '';
         this.item = '';
     }
 
@@ -45,21 +45,17 @@ export class ItemService {
             });
         })
     }
-    public getItemRating(item: string): void {
-        this.storage.get('token').then(value => {
+
+    public getItemRating(item: string) {
+            this.storage.get('token').then(value => {
             let headers = new Headers();
             headers.append('token', value)
             let options = new RequestOptions({ headers: headers });
-            this.http.get('https://keanubackend.herokuapp.com/rate/item/' + item, options).map(res => res.json()).subscribe(
-                data => {
-                    this.itemRating = data.data
-                    console.log(this.itemRating);
-                }, err => {
-                    console.log(err);
-                },
-            )
+            return this.http.get('https://keanubackend.herokuapp.com/rate/item/' + item, options).map(
+                res => res.json().data).toPromise();
         })
     }
+
     public postItemRating(): void {
         this.storage.get('token').then((value: string) => {
             let link = 'https://keanubackend.herokuapp.com/rate/item';

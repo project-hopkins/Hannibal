@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of menuItems">
+  <ion-card *ngFor="let item of menuItems; let i = index">
 
     <ion-card-content>
       <ion-card-title class="left">{{item.name}}</ion-card-title>
@@ -22,11 +22,13 @@
         </ion-col>
         <ion-col left text-left>
           <p id="itemDescription">{{item.description}}</p>
+          <p>{{ratingsArr[i]}}</p>              
         </ion-col>
       </ion-row>
 
       <ion-list>
         <ion-item>
+          <p>Price</p>
           ${{item.price}}
           <button ion-button outline item-end icon-left (click)="addItem(item._id)">
           <ion-icon name="cart"></ion-icon>
