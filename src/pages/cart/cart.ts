@@ -31,6 +31,7 @@ export class CartPage {
     this.recommendedItems = new Array<Object>();
     this.delivery = false;
     this.getRecommended();
+
   }
 
   /**
@@ -39,8 +40,8 @@ export class CartPage {
    * 
    * @memberof CartPage
    */
-  public GoOrderPage() {
-    this.navCtrl.push('OrderPage');
+  public GoToLocationPage() {
+    this.navCtrl.push('ChooseLocation');
   }
 
   /**
