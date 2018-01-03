@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, AlertController, IonicPage } from 'ionic-angular';
 import { Http, Headers } from '@angular/http';
 import { Storage } from '@ionic/storage';
+import { Camera } from 'ionic-native';
+import { concat } from 'rxjs/observable/concat';
 
 @IonicPage()
 @Component({
@@ -11,7 +13,7 @@ import { Storage } from '@ionic/storage';
 export class AddItemPage {
   public name: string;
   public description: string;
-  public imageURL: string;
+  public menuImage: string;
   public price: number;
   public calories: number;
   public category: string;
@@ -25,7 +27,7 @@ export class AddItemPage {
 
     this.name = '';
     this.description = '';
-    this.imageURL = '';
+   // this.menuImage = '';
     this.price = null;
     this.calories = null;
     this.category = '';
@@ -41,7 +43,7 @@ export class AddItemPage {
         {
           'name': this.name,
           'description': this.description,
-          'imageURL': this.imageURL,
+          'imageURL': this.menuImage,
           'price': Number(this.price),
           'calories': Number(this.calories),
           'category': this.category,
@@ -59,13 +61,42 @@ export class AddItemPage {
           console.log('posted registration done')
           this.alertCtrl.create({
             title: 'Item Added',
-            subTitle: 'Congratulations, a menu item has been added!',
+            subTitle: 'Congratulations, a menu item has been added!' + this.menuImage,
             buttons: ['OK']
           }).present();
           this.navCtrl.setRoot('AdminPage');
         }
         )
 
+    })
+  }
+  //Uses the camera to select take a photo for the menu item
+  useCamera(){
+    // tells the method to use the camera to get the image
+    Camera.getPicture({
+      destinationType: Camera.DestinationType.DATA_URL,
+      targetHeight: 400,
+      targetWidth: 600
+      }).then((imageData) => {
+        // sets the data to the menuImage variable to be stored
+        this.menuImage = "data:image/jpeg;base64, " + imageData;
+      }, (err) => {
+        console.log(err);
+      })
+  }
+  // Uses the phones native photoalbum to select an image to upload
+  selectImage(){
+    Camera.getPicture({
+      // tells the method to use the photo album to get the image
+      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+      // allows for the user to only select images to uplaod
+      mediaType: Camera.MediaType.PICTURE,
+      destinationType: Camera.DestinationType.DATA_URL
+    }).then((imageData) => {
+      // sets the data to the menuImage property
+      this.menuImage = 'data: image/jpeg;base64, ' + imageData;
+    }, (err) => {
+      console.log(err);
     })
   }
 }

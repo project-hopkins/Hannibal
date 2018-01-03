@@ -46,6 +46,9 @@ export class UserService {
         admin ? this.isAdmin.next(true) : this.isAdmin.next(false);
     }
 
+    public getIsAdminObservable(){
+        return this.isAdmin.asObservable();
+    }
 
     /**
      * Login in a user and set the users token

@@ -60,5 +60,12 @@ export class ProfilePage {
         this.orders[index]['items'][jindex]['name'] = itemData.data.item.name;
       });
     });  
+    this.storage.get('userFullDetails').then((val) => {
+      this.user = val;
+      console.log(this.user);
+    });
+    this.userService.getOrderHistory();
+
   }
+
 }
