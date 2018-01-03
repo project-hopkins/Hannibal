@@ -3,6 +3,7 @@ import { NavController, NavParams, AlertController, Alert, IonicPage } from 'ion
 import { Http } from '@angular/http';
 import { Storage } from '@ionic/storage';
 import { CartService } from '../../services/cartService';
+import { RecurseVisitor } from '@angular/compiler/src/i18n/i18n_ast';
 
 @IonicPage()
 @Component({
@@ -15,6 +16,7 @@ export class CartPage {
   public cartItemsIncrease: Map<String, number>;
   public cartItems: Array<Object>
   public delivery: boolean;
+  public recommendedItems: Array<Object>
   public token: String;
 
   constructor(
@@ -27,8 +29,10 @@ export class CartPage {
   ) {
     this.cartItemsIncrease = new Map<String, number>();
     this.cartItems = new Array<Object>();
+    this.recommendedItems = new Array<Object>();
     this.delivery = false;
-    
+    this.getRecommended();
+
   }
 
   /**
@@ -104,7 +108,6 @@ export class CartPage {
         }
       });
     }
-
     let confirm: Alert = this.alertController.create({
       title: 'Remove item',
       message: 'Remove ' + cartItem['item']['name'] + ' from cart?',
@@ -121,6 +124,19 @@ export class CartPage {
 
     confirm.present();
 
+  }
+
+  public getRecommended(){
+    this.http.get(`https://keanubackend.herokuapp.com/item/recommendations`).map(res => res.json()).subscribe(
+        data => {
+          this.recommendedItems = data.data.items;
+          console.log(this.recommendedItems);
+        });
+  }
+
+  public addToCart(itemId: String){
+    this.cartService.addToCart({ 'id': itemId, 'quantity': 1 });
+    location.reload();
   }
 
   ionViewDidLoad() {

@@ -56,4 +56,5 @@
     <plugin name="cordova-plugin-camera" spec="^3.0.0" />
     <engine name="android" spec="~6.3.0" />
     <allow-navigation href="http://192.168.0.18:8100" />
+    <allow-navigation href="http://10.28.59.143:8100" />
 </widget>
