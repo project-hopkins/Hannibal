@@ -42,9 +42,6 @@ export class MyApp {
       // this.selectedTheme
       this._userService.getIsAdminObservable().subscribe(
         data => {
-          console.log('***********************');
-          console.log(data);
-          console.log('***********************');
           if (data) {
             this.selectedTheme = 'dark-theme';
           }
