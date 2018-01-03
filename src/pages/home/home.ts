@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading, IonicPage } from 'ionic-angular';
-import { SubmenuPage } from '../submenu/submenu';
 import { Http } from '@angular/http';
 import { MenuCallService } from '../../services/getMenu';
 import 'rxjs/add/operator/map';
@@ -13,8 +12,10 @@ import { UserService } from '../../services/userService';
   templateUrl: 'home.html',
 })
 export class HomePage {
+
+  public isAdmin;
   public menuItems;
-  public itemsInSubmenu: Object;
+  public itemsInSubmenu: any;
   private menuCategories: Array<string> = ["Starter", "Salads", "Entrees", "Dessert"];
 
   constructor(
@@ -39,7 +40,7 @@ export class HomePage {
 
     this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
     this._getCategoriesCount();
-    
+
   }
 
 
@@ -54,7 +55,7 @@ export class HomePage {
    * @memberof HomePage
    */
   public async launchSubMenuPage(type: string): Promise<any> {
-    let menuItems=  await this.menuCall.getMenu(type);
+    let menuItems = await this.menuCall.getMenu(type);
     this.navCtrl.push('SubmenuPage', { data: menuItems });
   }
 
@@ -64,6 +65,7 @@ export class HomePage {
     this.storage.get('token').then((value: string) => {
       console.log(value)
     })
+
   }
 
 
@@ -73,7 +75,7 @@ export class HomePage {
    * @private
    * @memberof HomePage
    */
-  private _getCategoriesCount():void{
+  private _getCategoriesCount(): void {
     this.menuCategories.forEach(element => {
       this.http.get(`https://keanubackend.herokuapp.com/item/category/${element}/count`).map(res => res.json()).subscribe(
         data => {
@@ -82,4 +84,5 @@ export class HomePage {
         });
     });
   }
+
 }

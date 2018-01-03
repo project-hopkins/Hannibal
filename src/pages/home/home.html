@@ -1,36 +1,35 @@
-<!-- HomePage for Keanu's -->
-
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title >Home</ion-title>
+    <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
 
-<!-- Main Container with a blue background -->
+<!-- Main Container with a blue background [color]="isAdmin?'colorStatus':'primary'" -->
 <ion-content class="card-background-page">
+
   <ion-card (click)="launchSubMenuPage('Starter')">
-    <img src="assets/images/menu-starter.jpg"/>
+    <img src="assets/images/menu-starter.jpg" />
     <div class="card-title">Starters</div>
     <div class="card-subtitle">{{itemsInSubmenu.Starter}} Items</div>
   </ion-card>
 
   <ion-card (click)="launchSubMenuPage('Salads')">
-    <img src="assets/images/menu-salad.jpg"/>
+    <img src="assets/images/menu-salad.jpg" />
     <div class="card-title">Salads</div>
     <div class="card-subtitle">{{itemsInSubmenu.Salads}} Items</div>
   </ion-card>
 
   <ion-card (click)="launchSubMenuPage('Entrees')">
-    <img src="assets/images/menu-entrees.jpg"/>
+    <img src="assets/images/menu-entrees.jpg" />
     <div class="card-title">Entrees</div>
     <div class="card-subtitle">{{itemsInSubmenu.Entrees}} Items</div>
   </ion-card>
 
   <ion-card (click)="launchSubMenuPage('Dessert')">
-    <img src="assets/images/menu-dessert.jpg"/>
+    <img src="assets/images/menu-dessert.jpg" />
     <div class="card-title">Desserts</div>
     <div class="card-subtitle">{{itemsInSubmenu.Dessert}} Items</div>
   </ion-card>

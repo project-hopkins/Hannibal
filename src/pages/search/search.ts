@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Http } from '@angular/http';
 import { LoadingController, AlertController, IonicPage } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 import { CartService } from "../../services/cartService";
 
 @IonicPage()
@@ -23,7 +23,7 @@ export class SearchPage {
    * @param alertController 
    */
   constructor(
-    private http: Http,
+    private http: Http,private storage: Storage,
     private cartService: CartService,
     private loadingCtrl: LoadingController,
     private alertController: AlertController
@@ -77,5 +77,4 @@ export class SearchPage {
     loading.dismiss();
     this.alertController.create({title: item['name'], message: 'Added to cart', buttons: ['OK']}).present();
   }
-
 }

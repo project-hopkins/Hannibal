@@ -4,19 +4,12 @@ import { Storage } from '@ionic/storage';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { LoadingController, Loading } from 'ionic-angular';
 
-/*
-  Generated class for the Edititem page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @IonicPage()
 @Component({
   selector: 'page-edititem',
   templateUrl: 'edititem.html'
 })
 export class EdititemPage {
-
 
   public item: Object;
 

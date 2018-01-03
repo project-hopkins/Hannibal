@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, Nav, IonicPage } from 'ionic-angular';
-
+import { Storage } from '@ionic/storage';
 
 @IonicPage()
 @Component({
@@ -8,11 +8,11 @@ import { NavController, NavParams, Nav, IonicPage } from 'ionic-angular';
   templateUrl: 'admin.html'
 })
 export class AdminPage {
+
   @ViewChild(Nav) nav: Nav;
   item: Array<{ title: string, component: any }>;
 
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage) {
 
     this.item =
       [

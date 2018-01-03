@@ -12,6 +12,7 @@ import { RecurseVisitor } from '@angular/compiler/src/i18n/i18n_ast';
   providers: [CartService]
 })
 export class CartPage {
+
   public cartItemsIncrease: Map<String, number>;
   public cartItems: Array<Object>
   public delivery: boolean;
@@ -148,6 +149,7 @@ export class CartPage {
     this.storage.get('token').then((value: string) => {
       this.token = value;
     })
+
   }
 }
 
