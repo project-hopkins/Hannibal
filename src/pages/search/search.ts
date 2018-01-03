@@ -11,10 +11,7 @@ import { CartService } from "../../services/cartService";
   providers: [CartService]
 })
 export class SearchPage {
-  public user: Object;
-  public testUser: any;
-  public userAdmin: boolean;
-  public userNotAdmin: boolean;
+
   private _searchUrl: string;
   public results: Array<Object>;
 
@@ -41,7 +38,6 @@ export class SearchPage {
    */
   public ionViewDidLoad(): void {
     console.log('ionViewDidLoad SearchPage');
-    this.checkAdminRights();
   }
 
 
@@ -81,17 +77,4 @@ export class SearchPage {
     loading.dismiss();
     this.alertController.create({title: item['name'], message: 'Added to cart', buttons: ['OK']}).present();
   }
-  public checkAdminRights() {
-    this.storage.get('adminRights').then((val) => {
-      this.testUser = val;
-      if (this.testUser == true) {
-         this.userAdmin = true;
-         this.userNotAdmin = false;
-      } else {
-        this.userAdmin = false;
-        this.userNotAdmin = true;
-      }
-    });
-  }
-
 }

@@ -11,10 +11,6 @@ import { CartService } from '../../services/cartService';
   providers: [CartService]
 })
 export class CartPage {
-  public user: Object;
-  public testUser: any;
-  public userAdmin: boolean;
-  public userNotAdmin: boolean;
 
   public cartItemsIncrease: Map<String, number>;
   public cartItems: Array<Object>
@@ -138,19 +134,6 @@ export class CartPage {
       this.token = value;
     })
 
-    this.checkAdminRights();
-  }
-  public checkAdminRights() {
-    this.storage.get('adminRights').then((val) => {
-      this.testUser = val;
-      if (this.testUser == true) {
-         this.userAdmin = true;
-         this.userNotAdmin = false;
-      } else {
-        this.userAdmin = false;
-        this.userNotAdmin = true;
-      }
-    });
   }
 }
 
