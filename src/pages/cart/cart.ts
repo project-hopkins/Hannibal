@@ -11,6 +11,7 @@ import { CartService } from '../../services/cartService';
   providers: [CartService]
 })
 export class CartPage {
+
   public cartItemsIncrease: Map<String, number>;
   public cartItems: Array<Object>
   public delivery: boolean;
@@ -132,6 +133,7 @@ export class CartPage {
     this.storage.get('token').then((value: string) => {
       this.token = value;
     })
+
   }
 }
 

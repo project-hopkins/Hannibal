@@ -35,12 +35,15 @@ ion-content {
   background-color: #f4f4f7 !important;
 }
 
-// color="primary"
-// ion-navbar{
-// 	background-color: #387ef5 !important;
-// }
+// $toolbar-background: #387ef5;
 
+// .toolbar-danger{
+//   background-color: #f53d3d !important;
+// }
 $toolbar-background: #387ef5;
+@import "theme.dark";
+@import "theme.light";
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
