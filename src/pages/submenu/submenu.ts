@@ -132,8 +132,13 @@ export class SubmenuPage {
         data => {
           this.ratingsItem = data;
           // console.log(data);
-          console.log(this.ratingsItem);
-          this.ratingsArr.push(this.ratingsItem)
+          let err = 'error';
+          if(err in this.ratingsItem){
+            this.ratingsArr.push(null)
+          }else{
+            console.log(this.ratingsItem);
+            this.ratingsArr.push(this.ratingsItem)
+          }
           console.log(this.ratingsArr);
         });
     });
