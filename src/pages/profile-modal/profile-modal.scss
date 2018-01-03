@@ -1,16 +1,18 @@
 page-profile-modal {
-
-}
-
-.text-center {
-    text-align: center;
-}
-
-.modalTitle {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    text-align: center;
+    .text-center {
+        text-align: center;
+    }
+    
+    .modalTitle {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .scroll-content{
+        background-color: #f4f4f7 !important;
+    }
 }
