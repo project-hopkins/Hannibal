@@ -34,7 +34,7 @@ export class MyApp {
     private _splashScreen: SplashScreen,
     private _statusBar: StatusBar,
     private _userService: UserService
-  ) {    
+  ) {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -44,8 +44,9 @@ export class MyApp {
         data => {
           if (data) {
             this.selectedTheme = 'dark-theme';
+            this.loginState = LoginState.LoggedInAndAdmin;
           }
-          else{
+          else {
             this.selectedTheme = 'light-theme';
           }
         }
@@ -83,22 +84,17 @@ export class MyApp {
       { title: 'Login', component: 'LoginPage', access: LoginState.LoggedOut }
     ];
 
-    this._userService.isLoggedIn.subscribe((value:boolean)=> {
+    this._userService.isLoggedIn.subscribe((value: boolean) => {
       if (value) {
         console.log('loggedIN');
         this.loginState = LoginState.LoggedIn;
       }
-      else{
+      else {
         console.log('not logged in');
         this.loginState = LoginState.LoggedOut;
       }
     });
 
-    this._userService.isAdmin.subscribe((value: boolean) =>{
-      if (value) {
-        this.loginState = LoginState.LoggedInAndAdmin;;
-      }
-    });
   }
 
   openPage(page) {
@@ -106,13 +102,13 @@ export class MyApp {
       this._userService.logout();
       this.nav.setRoot('HomePage');
     } else {
-      this.nav.setRoot(page.component); 
+      this.nav.setRoot(page.component);
     }
   }
 }
 
 enum LoginState {
-  LoggedOut =0,
+  LoggedOut = 0,
   LoggedIn,
   LoggedInAndAdmin
 }
