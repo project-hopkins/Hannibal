@@ -13,13 +13,11 @@ import { UserService } from '../services/userService';
 })
 export class MyApp {
 
-  public user: Object;
-  public testUser: any;
-  public userAdmin: boolean;
-  public userNotAdmin: boolean;
   rootPage: any = 'HomePage';
   @ViewChild(Nav) nav: Nav;
   public index: any;
+
+  public selectedTheme: String = 'light-theme';
 
   // set default stat as LoggedOut
   public loginState: LoginState = LoginState.LoggedOut;
@@ -40,6 +38,22 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+
+      // this.selectedTheme
+      this._userService.getIsAdminObservable().subscribe(
+        data => {
+          console.log('***********************');
+          console.log(data);
+          console.log('***********************');
+          if (data) {
+            this.selectedTheme = 'dark-theme';
+          }
+          else{
+            this.selectedTheme = 'light-theme';
+          }
+        }
+      )
+
 
       if (this.platform.is('cordova')) {
         _statusBar.styleDefault();
@@ -81,7 +95,6 @@ export class MyApp {
         console.log('not logged in');
         this.loginState = LoginState.LoggedOut;
       }
-      this.checkAdminRights();
     });
 
     this._userService.isAdmin.subscribe((value: boolean) =>{
@@ -98,18 +111,6 @@ export class MyApp {
     } else {
       this.nav.setRoot(page.component); 
     }
-  }
-  public checkAdminRights() {
-    this.storage.get('adminRights').then((val) => {
-      this.testUser = val;
-      if (this.testUser == true) {
-         this.userAdmin = true;
-         this.userNotAdmin = false;
-      } else {
-        this.userAdmin = false;
-        this.userNotAdmin = true;
-      }
-    });
   }
 }
 
