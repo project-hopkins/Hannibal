@@ -7,7 +7,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
 import { UserService } from '../services/userService';
 import { MyApp } from './app.component';
 import { LocationService } from '../services/chooseLocationService';
