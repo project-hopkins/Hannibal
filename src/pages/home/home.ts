@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, Loading, IonicPage } from 'ionic-angular';
-import { SubmenuPage } from '../submenu/submenu';
 import { Http } from '@angular/http';
 import { MenuCallService } from '../../services/getMenu';
 import 'rxjs/add/operator/map';
@@ -13,12 +12,10 @@ import { UserService } from '../../services/userService';
   templateUrl: 'home.html',
 })
 export class HomePage {
-  public user: Object;
-  public testUser: any;
-  public userAdmin: boolean;
-  public userNotAdmin: boolean;
+
+  public isAdmin;
   public menuItems;
-  public itemsInSubmenu: Object;
+  public itemsInSubmenu: any;
   private menuCategories: Array<string> = ["Starter", "Salads", "Entrees", "Dessert"];
 
   constructor(
@@ -43,7 +40,7 @@ export class HomePage {
 
     this.http.get('https://keanubackend.herokuapp.com').subscribe(() => { }, () => { }, () => loading.dismiss());
     this._getCategoriesCount();
-    
+
   }
 
 
@@ -58,7 +55,7 @@ export class HomePage {
    * @memberof HomePage
    */
   public async launchSubMenuPage(type: string): Promise<any> {
-    let menuItems=  await this.menuCall.getMenu(type);
+    let menuItems = await this.menuCall.getMenu(type);
     this.navCtrl.push('SubmenuPage', { data: menuItems });
   }
 
@@ -69,7 +66,6 @@ export class HomePage {
       console.log(value)
     })
 
-    this.checkAdminRights();
   }
 
 
@@ -79,7 +75,7 @@ export class HomePage {
    * @private
    * @memberof HomePage
    */
-  private _getCategoriesCount():void{
+  private _getCategoriesCount(): void {
     this.menuCategories.forEach(element => {
       this.http.get(`https://keanubackend.herokuapp.com/item/category/${element}/count`).map(res => res.json()).subscribe(
         data => {
@@ -88,16 +84,5 @@ export class HomePage {
         });
     });
   }
-  public checkAdminRights() {
-    this.storage.get('adminRights').then((val) => {
-      this.testUser = val;
-      if (this.testUser == true) {
-         this.userAdmin = true;
-         this.userNotAdmin = false;
-      } else {
-        this.userAdmin = false;
-        this.userNotAdmin = true;
-      }
-    });
-  }
+
 }
