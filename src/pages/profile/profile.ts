@@ -11,9 +11,7 @@ import 'rxjs/add/operator/map';
 })
 export class ProfilePage {
   public user: Object;
-  public testUser: any;
-  public userAdmin: boolean;
-  public userNotAdmin: boolean;
+
   constructor(public navParams: NavParams,
     private storage: Storage,
     private userService: UserService) {
@@ -26,18 +24,7 @@ export class ProfilePage {
       console.log(this.user);
     });
     this.userService.getOrderHistory();
-    this.checkAdminRights();
+
   }
-  public checkAdminRights() {
-    this.storage.get('adminRights').then((val) => {
-      this.testUser = val;
-      if (this.testUser == true) {
-         this.userAdmin = true;
-         this.userNotAdmin = false;
-      } else {
-        this.userAdmin = false;
-        this.userNotAdmin = true;
-      }
-    });
-  }
+
 }
