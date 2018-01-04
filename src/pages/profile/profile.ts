@@ -65,12 +65,6 @@ export class ProfilePage {
       console.log(this.user);
     });
     this.userService.getOrderHistory();
-<<<<<<< HEAD
+
     }
 }
-=======
-
-  }
-
-}
->>>>>>> 1fe11b6f40e0884c01114f0d612336730f48be6b
