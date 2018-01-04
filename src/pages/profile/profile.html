@@ -1,25 +1,18 @@
-<!--
-  Generated template for the Profile page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>Profile</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Profile</ion-title>
+    </ion-navbar>
 </ion-header>
-
 
 <ion-content padding>
 
   <ion-list>
     <ion-item-group>
       <ion-item-divider color="light">Personal Information</ion-item-divider>
-      <ion-item>
+      <ion-item (click)="openEditProfileModal('personal')">
         <ion-avatar item-left>
           <img src="assets/images/account.svg">
         </ion-avatar>
@@ -31,7 +24,7 @@
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">Your Card Information</ion-item-divider>
-      <ion-item>
+      <ion-item (click)="openEditProfileModal('payment')">
         <ion-avatar item-left>
           <img src="assets/images/creditcard-flat.png">
         </ion-avatar>
@@ -41,7 +34,7 @@
     </ion-item-group>
     <ion-item-group>
       <ion-item-divider color="light">Your Delivery Address</ion-item-divider>
-      <ion-item>
+      <ion-item (click)="openEditProfileModal('address')">
         <ion-avatar item-left>
           <img src="assets/images/address.png">
         </ion-avatar>
@@ -50,21 +43,24 @@
       </ion-item>
     </ion-item-group>
     <br />
-    <button ion-button block color="secondary" (click)="UpdateInformation()">Update Information</button>
+    <button ion-button block color="secondary" (click)="openEditProfileModal('password')">Change Password</button>
     <ion-item-group>
       <ion-item-divider color="light">Your Last 5 Orders</ion-item-divider>
-      <ion-item *ngFor="let order of orders | slice:0:5; let i=index" (click)="ShowOrderDetails(order)">
+      <ion-item *ngFor="let order of orders | slice:0:5; let i=index">
         <ion-avatar item-left>
           <img src="assets/images/food.png">
         </ion-avatar>
         <p>{{order.date}}</p>
+        <div *ngFor="let items of order.items;">
+          <p>{{items.quantity}}x {{items.name}}</p>
+        </div>
         <div *ngIf="order.delivery == 'True'">
           <p>Delivery</p>
         </div>
         <div *ngIf="order.delivery == 'False'">
           <p>Takeout</p>
         </div>
-        <p>Total Price : ${{orders.total}} </p>
+        <p>Total Price : ${{order.total}} </p>
       </ion-item>
     </ion-item-group>
   </ion-list>

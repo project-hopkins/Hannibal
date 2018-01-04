@@ -1,0 +1,114 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <!--<button ion-button clear block color="light" (click)="closeModal()">Cancel</button>
+    <ion-title>Edit Information</ion-title>-->
+      
+    <button ion-button icon-only menuToggle (click)="closeModal()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </button>
+  
+    <ion-title class="modalTitle">
+      Edit Information
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list *ngIf="informationType == 'personal'">
+
+    <h5 class="text-center"> Personal Profile</h5>
+    
+    <ion-item>
+      <ion-label stacked>First Name</ion-label>
+      <ion-input type="text" [ngModel]="user?.displayName?.firstName" (ngModelChange)="user.displayName.firstName = $event"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Last Name</ion-label>
+      <ion-input type="text" [ngModel]="user?.displayName?.lastName" (ngModelChange)="user.displayName.lastName = $event"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="user.email"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="informationType == 'payment'">
+    
+    <h2 class="text-center">Add New Credit Card</h2>
+
+    <ion-item>
+      <ion-label stacked>Name On Card</ion-label>
+      <ion-input type="text" [ngModel]="user?.paymentInfo?.name" (ngModelChange)="user.paymentInfo.name = $event"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Credit Card Number</ion-label>
+      <ion-input type="text"[ngModel]="user?.paymentInfo?.num" (ngModelChange)="user.paymentInfo.num = $event"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Type Of Card</ion-label>
+      <ion-select [ngModel]="user?.paymentInfo?.cardType" (ngModelChange)="user.paymentInfo.cardType = $event">
+        <ion-option value="VISA">VISA</ion-option>
+        <ion-option value="MASTERCARD">Mastercard</ion-option>
+        <ion-option value="AMEX">Amex</ion-option>
+      </ion-select>    
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="informationType == 'address'">
+    
+    <h2 class="text-center">Edit Address</h2>
+    <ion-item>
+      <ion-label floating>Street Number</ion-label>
+      <ion-input type="text" [ngModel]="user?.address?.number" (ngModelChange)="user.address.number = $event"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Street Name</ion-label>
+      <ion-input type="text" [ngModel]="user?.address?.name" (ngModelChange)="user.address.name = $event"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Street Type</ion-label>
+      <ion-input type="text" [ngModel]="user?.address?.streetType" (ngModelChange)="user.address.streetType = $event"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Postal Code</ion-label>
+      <ion-input type="text" [ngModel]="user?.address?.postalCode" (ngModelChange)="user.address.postalCode = $event"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-list *ngIf="informationType == 'password'">
+
+    <h2 class="text-center">Change Password</h2>      
+
+    <ion-item>
+        <ion-label stacked>Current password:</ion-label>
+        <ion-input required type="password" [(ngModel)]="password.currentPassword"></ion-input>
+      </ion-item>
+
+    <ion-item>
+        <ion-label stacked>New password</ion-label>
+        <ion-input required type="password" [(ngModel)]="password.newPassword"></ion-input>
+    </ion-item>
+            
+    <ion-item>
+      <ion-label stacked>Reenter new password</ion-label>
+      <ion-input required type="password" [(ngModel)]="password.newPasswordAgain"></ion-input>
+    </ion-item>
+  
+  </ion-list>
+
+  <p *ngIf="informationType != 'password'" >Only Enter text in fields you wish to change</p>  
+
+  <button ion-button block (click)="updateInformation()">Save Changes</button>
+
+</ion-content>

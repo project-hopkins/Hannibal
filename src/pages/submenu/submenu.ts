@@ -47,7 +47,6 @@ export class SubmenuPage {
     }
   }
   // Edit Items Event
-
   public editItemClick(item): void {
 
     let loader: Loading = this.loadingCtrl.create({ content: 'loading item to edit' })

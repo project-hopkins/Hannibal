@@ -27,7 +27,7 @@ export class AddItemPage {
 
     this.name = '';
     this.description = '';
-    this.menuImage = '';
+   // this.menuImage = '';
     this.price = null;
     this.calories = null;
     this.category = '';
@@ -61,7 +61,7 @@ export class AddItemPage {
           console.log('posted registration done')
           this.alertCtrl.create({
             title: 'Item Added',
-            subTitle: 'Congratulations, a menu item has been added!',
+            subTitle: 'Congratulations, a menu item has been added!' + this.menuImage,
             buttons: ['OK']
           }).present();
           this.navCtrl.setRoot('AdminPage');

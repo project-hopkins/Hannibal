@@ -4,19 +4,12 @@ import { Storage } from '@ionic/storage';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { LoadingController, Loading } from 'ionic-angular';
 
-/*
-  Generated class for the Edititem page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @IonicPage()
 @Component({
   selector: 'page-edititem',
   templateUrl: 'edititem.html'
 })
 export class EdititemPage {
-
 
   public item: Object;
 
@@ -27,9 +20,18 @@ export class EdititemPage {
     private http: Http,
     public loadingCtrl: LoadingController) {
     this.item = this.navParams.get('data')
+    
+    console.log(this.item['isRecommended']);
 
-    console.log(this.item);
-
+    if(this.item['isRecommended'] == false || this.item['isRecommended'] == null || this.item['isRecommended'] == "false"){
+      this.item['isRecommended'] = false;
+      console.log('is now false');
+    }
+    else {
+      this.item['isRecommended'] = true;
+      console.log('is now true');
+    }
+    //console.log(this.item);
   }
 
   ionViewDidLoad() {}
@@ -41,6 +43,15 @@ export class EdititemPage {
     let link = 'https://keanubackend.herokuapp.com/admin/item/update';
     let loader: Loading = this.loadingCtrl.create({ content: 'loading' })
     loader.present();
+
+    if(this.item['isRecommended'] == false) {
+      this.item['isRecommended'] = "false";
+    }
+    
+    else {
+      this.item['isRecommended'] = "true";
+    }
+
 
     this.storage.get('token').then(value => {
 
@@ -60,10 +71,8 @@ export class EdititemPage {
         },
         () => {
           loader.dismiss();
-
+          this.navCtrl.pop();
         });
-
-
 
     });
   }
