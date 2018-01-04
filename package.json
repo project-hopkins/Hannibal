@@ -36,6 +36,7 @@
     "ionic-angular": "3.5.3",
     "ionic-native": "2.4.1",
     "ionic-plugin-keyboard": "^2.2.1",
+    "ionic2-rating": "^1.2.2",
     "ionicons": "3.0.0",
     "onesignal-cordova-plugin": "^2.2.2",
     "restore": "0.3.0",

@@ -6,31 +6,33 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let item of menuItems">
+  <ion-card *ngFor="let item of menuItems; let i = index">
 
     <ion-card-content>
-      <ion-card-title class="left">{{item.name}}</ion-card-title>
+      <ion-card-title class="left">{{item.name}} </ion-card-title>
       <ion-row>
         <ion-col center text-center>
           <img item-left src={{item.imageURL}}/>
-          <p class="center">{{item.calories}} calories</p>
+          <rating class="left" [(ngModel)]="ratingsArr[i]" readOnly="false" max="5" nullable="true" (ngModelChange)="onModelChange(item._id, ratingsArr[i])"></rating>
         </ion-col>
         <ion-col left text-left>
           <p id="itemDescription">{{item.description}}</p>
+          <p><small>{{item.calories}} calories</small></p>
         </ion-col>
       </ion-row>
-
       <ion-list>
         <ion-item>
+          <p>Price</p>
           ${{item.price}}
           <button ion-button outline item-end icon-left (click)="addItem(item._id)">
-          <ion-icon name="cart"></ion-icon>
-        Add To Cart       
-      </button>
+            <ion-icon name="cart"></ion-icon>
+            Add To Cart
+          </button>
         </ion-item>
       </ion-list>
       <!-- Delete Button neil-->
-      <button ion-button color="danger" full *ngIf="isAdmin" (click)="deleteClick(item._id)"><ion-icon name="close"> Remove</ion-icon>
+      <button ion-button color="danger" full *ngIf="isAdmin" (click)="deleteClick(item._id)">
+        <ion-icon name="close"> Remove</ion-icon>
       </button>
 
       <!-- Edit Button neil-->

@@ -66,6 +66,5 @@ export class ProfilePage {
     });
     this.userService.getOrderHistory();
 
-  }
-
+    }
 }
