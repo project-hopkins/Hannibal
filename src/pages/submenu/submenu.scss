@@ -12,8 +12,22 @@
     
 }
 */
-
-
+/*#ratingDisp{
+    padding: inherit
+}*/
+ul {
+    padding: 0px;
+  
+    &.rating li {
+      padding: 5px 5px !important;
+      background: none;
+      color: #ffb400;
+  
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
 .submenu-BtnCart{
     margin-top: 15px;
     background-color: #32cd32;

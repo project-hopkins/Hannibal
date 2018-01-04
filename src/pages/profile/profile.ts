@@ -16,6 +16,8 @@ export class ProfilePage {
   public testUser: any;
   public userAdmin: boolean;
   public userNotAdmin: boolean;
+  public rating: any;
+
   constructor(public navParams: NavParams,
     private storage: Storage,
     private userService: UserService) {

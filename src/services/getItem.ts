@@ -56,15 +56,16 @@ export class ItemService {
         })
     }
 
-    public postItemRating(): void {
+    public postItemRating(item: any, rating: any): void {
         this.storage.get('token').then((value: string) => {
             let link = 'https://keanubackend.herokuapp.com/rate/item';
             let header = new Headers({ 'Content-Type': 'application/json', 'token': value });
             let body =
                 {
-                    'itemid': this.item,
-                    'rating': this.rating
+                    'itemid': item,
+                    'rating': rating
                 };
+                console.log(body);
             this.http.post(link, body, { headers: header })
                 .subscribe(
                 (data) => { console.log(data) },
